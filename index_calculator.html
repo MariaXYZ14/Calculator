@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <title>Calculator</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" media="all" href="style_calculator.css" />
+        <script src="calculator.js"> </script>
+    </head>
+
+    <body>
+        <div id="main-calculator">
+            <h1 id="title">Calculator</h1>
+            <input type="text" id="screen"><br>
+
+            <div class="w3-container">
+
+                <button id="seven" class="numbers" value="7" onclick="click(this.value)">7</button>
+                <button id="eight" class="numbers" value="8" onclick="click(this.value)">8</button>
+                <button id="nine"  class="numbers" value="9" onclick="click(this.value)">9</button>
+
+                <button id="four"  class="numbers" value="4" onclick="click(this.value)">4</button>
+                <button id="five"  class="numbers" value="5" onclick="click(this.value)">5</button>
+                <button id="six"   class="numbers" value="6" onclick="click(this.value)">6</button>
+
+                <button id="one"   class="numbers" value="1" onclick="click(this.value)">1</button>
+                <button id="two"   class="numbers" value="2" onclick="click(this.value)">2</button>
+                <button id="three" class="numbers" value="3" onclick="click(this.value)">3</button>
+
+                <button id="zero"  class="numbers" value="0">0</button>
+
+                <button id="comma"  value=",">,</button>
+
+                <button id="division" class="operation" value="/" onclick="click(this.value)">/</button>
+                <button id="multiply" class="operation" value="x" onclick="click(this.value)">x</button>
+                <button id="minus"    class="operation" value="-" onclick="click(this.value)">-</button>
+                <button id="plus"     class="operation" value="+" onclick="click(this.value)">+</button>
+                <button id="equal"    class="operation" value="=" onclick="click(this.value)">=</button>
+                
+                <button id="C" value="C">C</button> 
+                <button id="remove-button" value="CE">CE</button>
+
+            </div>
+
+        </div>
+
+
+        
+    </body>
+
+</html>
+
