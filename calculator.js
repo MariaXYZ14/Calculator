@@ -1,5 +1,6 @@
 function returnValue(x) {
-   
+   if(x.length<10){
+    
     if(x==','  &&  document.getElementById('screen').value == 0){
         
         document.getElementById('screen').value+="0,";
@@ -9,6 +10,8 @@ function returnValue(x) {
          document.getElementById('screen').value += x;
 
     }
+
+}
 }
 
 function changeHighlighted(x){
@@ -29,4 +32,10 @@ function eraseValue(x) {
     removeHighlighted();
     document.getElementById('screen').value = x;
     
+}
+
+function calculate(){
+    var number=document.getElementById('screen').value;
+    var number2=eval(number);
+    document.getElementById('screen').value=number2;
 }
