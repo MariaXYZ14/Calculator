@@ -175,7 +175,7 @@ body{
 
 }
 
-#remove-button{
+#plus-minus{
     
     position:relative;
     height:60px;
@@ -187,7 +187,7 @@ body{
 
 }
 
-#remove-button:hover{
+#plus-minus:hover{
 
     cursor: pointer;
     opacity:80%;
