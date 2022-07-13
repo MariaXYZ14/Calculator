@@ -11,9 +11,22 @@ function returnValue(x) {
     }
 }
 
-function eraseValue(x) {
-   
-    document.getElementById('screen').value = x;
+function changeHighlighted(x){
+    removeHighlighted();
+    let changeClass=x.currentTarget.classList
+    changeClass.add("operation2");
+}
+
+function removeHighlighted(){
+    let changeClass=document.getElementsByClassName("operation");
+    for(let index=0;index<changeClass.length;index++){
+        changeClass[index].classList.remove("operation2");
+    }
     
 }
 
+function eraseValue(x) {
+    removeHighlighted();
+    document.getElementById('screen').value = x;
+    
+}

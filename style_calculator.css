@@ -147,12 +147,28 @@ body{
 
 }
 
+.operation2{
+
+    position:relative;
+    height:70px;
+    width:70px;
+    border-radius:50%;
+    background-color: rgb(96, 168, 204);
+    display:inline-block;
+    margin:40px 80px 0px 80px;
+    top:-465px;
+    left:280px;
+    font-size:30px;
+
+}
+
 .operation:hover{
 
     opacity:70%;
     cursor: pointer;
     transform: scale(1.05);
 }
+
 
 #C{
 
