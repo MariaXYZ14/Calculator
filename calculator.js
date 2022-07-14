@@ -1,9 +1,11 @@
+var y; //first number
+var z; //second number
+
 window.onload = function(){ 
     pantalla=document.getElementById("textoPantalla"); 
     document.onkeydown = keyboard; }
 
 function returnValue(x) {
-   if(x.length<10){
 
     if(x==','  &&  document.getElementById('screen').value == 0){
         
@@ -15,7 +17,8 @@ function returnValue(x) {
 
     }
 
-}
+    let y2=document.getElementById('screen').value.substring(0,document.getElementById('screen').value.indexOf('+'));
+    console.log(y2);
 }
 
 function changeHighlighted(changeClass){
