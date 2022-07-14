@@ -7,6 +7,12 @@ body{
 
 }
 
+::placeholder{
+
+    color:white;
+
+}
+
 
 .w3-container{
 

@@ -38,9 +38,11 @@ function eraseValue(x) {
 }
 
 function calculate(){
+    removeHighlighted();
     var number=document.getElementById('screen').value;
     var number2=eval(number.replace('x','*'));
     document.getElementById('screen').value=number2;
+
     if(number2=='Infinity' || number2=='-Infinity' || !(number2==number2)){
         document.getElementById('screen').value='ERROR';
     }
