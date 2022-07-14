@@ -59,13 +59,13 @@ function keyboard (TheEvent) {
        p=String(p);
        returnValue(p);
        }
-       
+
     if (k==110 || k==190) {returnValue(",")} 
-    if (k==106 || k==88) {returnValue('x'); changeHighlighted()} 
-    if (k==107) {returnValue('+'); changeHighlighted()} 
-    if (k==109) {returnValue('-'); changeHighlighted()} 
-    if (k==111) {returnValue('/'); changeHighlighted()} 
+    if (k==106 || k==88) {returnValue('x'); changeHighlighted('x')} 
+    if (k==107) {returnValue('+'); changeHighlighted('+')} 
+    if (k==109) {returnValue('-'); changeHighlighted('-')} 
+    if (k==111) {returnValue('/'); changeHighlighted('/')} 
     if (k==32 || k==13) {calculate()} //equal or space
-    if (k==67) {eraseValue()} //C
+    if (k==67) {eraseValue(" ")} //C
     
     }
