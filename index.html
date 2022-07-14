@@ -12,7 +12,7 @@
     <body>
         <div id="main-calculator">
             <h1 id="title">Calculator</h1>
-            <input type="text" id="screen" disabled><br>
+            <input type="text" id="screen" value="0" disabled><br>
 
             <div class="w3-container">
 
@@ -39,7 +39,7 @@
                 <button id="equal"    class="operation" value="=" onclick="calculate()">=</button>
                 
                 <button id="C" value=" " onclick="eraseValue(this.value)">C</button> 
-                <button id="plus-minus">+/-</button>
+                <button id="plus-minus" onclick="changePlusMinus()">+/-</button>
 
             </div>
 

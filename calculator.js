@@ -41,6 +41,15 @@ function calculate(){
     var number=document.getElementById('screen').value;
     var number2=eval(number.replace('x','*'));
     document.getElementById('screen').value=number2;
+    if(number2=='Infinity' || number2=='-Infinity' || !(number2==number2)){
+        document.getElementById('screen').value='ERROR';
+    }
+
+}
+
+function changePlusMinus(){
+
+    
 }
 
 function keyboard (TheEvent) { 
@@ -60,11 +69,11 @@ function keyboard (TheEvent) {
        }
 
     if (k==110 || k==190) {returnValue(",")} 
-    if (k==106 || k==88) {returnValue('x'); changeHighlighted(document.getElementById('multiply'))} 
-    if (k==107) {returnValue('+'); changeHighlighted(event)} 
-    if (k==109) {returnValue('-'); changeHighlighted('-')} 
-    if (k==111) {returnValue('/'); changeHighlighted('/')} 
+    if (k==106 || k==88) {returnValue('x'); changeHighlighted(document.getElementById('multiply').classList)} 
+    if (k==107) {returnValue('+'); changeHighlighted(document.getElementById('plus').classList)} 
+    if (k==109) {returnValue('-'); changeHighlighted(document.getElementById('minus').classList)} 
+    if (k==111) {returnValue('/'); changeHighlighted(document.getElementById('division').classList)} 
     if (k==32 || k==13) {calculate()} //equal or space
-    if (k==67) {eraseValue(" ")} //C
+    if (k==27) {eraseValue(" ")} //C
     
     }
