@@ -8,6 +8,7 @@ window.onload = function(){
 
 function returnValue(x) {
    
+
     if(x==','  &&  document.getElementById('screen').value == 0){
         
         document.getElementById('screen').value+="0,";
@@ -115,9 +116,9 @@ function calculate2(){
 }
 
 function changePlusMinus(){
+    document.getElementById('screen').value=-document.getElementById('screen').value;
 
-
-    if(document.getElementById('screen').value.includes('+')&&(y>0 ||y<0)){
+   /* if(document.getElementById('screen').value.includes('+')&&(y>0 ||y<0)){
         if(y>0){
             y=-y;
         }
@@ -165,13 +166,12 @@ function changePlusMinus(){
     else{
         document.getElementById('screen').value=-document.getElementById('screen').value;
 
-    }
-
-   /* if(z==parseFloat(second_number.substring(second_number.indexOf('/')+1,second_number.length)) && document.getElementById('screen').value.includes('+')){
-
-
     }*/
 
+    /*   if((document.getElementById('screen').value.indexOf('+')+1)!=null){
+        document.getElementById('screen').value=y+"-"+(-z);
+
+    }*/
     
     console.log(y);
    
