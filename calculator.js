@@ -1,5 +1,5 @@
-var y;
-var z;
+var y=null;
+var z=null;
 var result;
 
 window.onload = function(){ 
@@ -7,7 +7,7 @@ window.onload = function(){
     document.onkeydown = keyboard; }
 
 function returnValue(x) {
-
+   
     if(x==','  &&  document.getElementById('screen').value == 0){
         
         document.getElementById('screen').value+="0,";
@@ -59,7 +59,8 @@ function removeHighlighted(){
 function eraseValue(x) {
     removeHighlighted();
     document.getElementById('screen').value = x;
-    
+    document.getElementById('screen').placeholder = "0";
+
 }
 
 function calculate(){
@@ -115,7 +116,65 @@ function calculate2(){
 
 function changePlusMinus(){
 
+
+    if(document.getElementById('screen').value.includes('+')&&(y>0 ||y<0)){
+        if(y>0){
+            y=-y;
+        }
+        else if(y<0){
+            y=-y; 
+        }
+        
+        document.getElementById('screen').value=y+"+";
+
+    }
+    else if(document.getElementById('screen').value.includes('-')&&(y>0 ||y<0)){
+        if(y>0){
+            y=-y;
+        }
+        else if(y<0){
+            y=-y; 
+        }
+        document.getElementById('screen').value=y+"-";
+    }
+    else if(document.getElementById('screen').value.includes('x')&&(y>0 ||y<0)){
+        
+        if(y>0){
+            y=-y;
+        }
+        else if(y<0){
+            y=-y; 
+        }
+        
+        document.getElementById('screen').value=y+"x";
+    }
+     else if(document.getElementById('screen').value.includes('/')&&(y>0 ||y<0)){
+        
+        
+        if(y>0){
+            y=-y;
+        }
+        else if(y<0){
+            y=-y; 
+        }
+        
+        document.getElementById('screen').value=y+"/";
+        
+    } 
     
+    else{
+        document.getElementById('screen').value=-document.getElementById('screen').value;
+
+    }
+
+   /* if(z==parseFloat(second_number.substring(second_number.indexOf('/')+1,second_number.length)) && document.getElementById('screen').value.includes('+')){
+
+
+    }*/
+
+    
+    console.log(y);
+   
 }
 
 function keyboard (TheEvent) { 
