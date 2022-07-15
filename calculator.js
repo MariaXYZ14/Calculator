@@ -1,5 +1,6 @@
-var y; //first number
-var z; //second number
+var y;
+var z;
+var result;
 
 window.onload = function(){ 
     pantalla=document.getElementById("textoPantalla"); 
@@ -17,8 +18,29 @@ function returnValue(x) {
 
     }
 
-    let y2=document.getElementById('screen').value.substring(0,document.getElementById('screen').value.indexOf('+'));
-    console.log(y2);
+    let first_number =document.getElementById('screen').value;
+    first_number=first_number.replace(',','.');
+
+    if(first_number.includes('+')){
+        y=parseFloat(first_number.substring(0,first_number.indexOf('+')));
+        
+
+    }
+    if(first_number.includes('-')){
+        y=parseFloat(first_number.substring(0,first_number.indexOf('-')));
+
+    }
+    if(first_number.includes('x')){
+        y=parseFloat(first_number.substring(0,first_number.indexOf('x')));
+
+    }
+    if (first_number.includes('/')){
+        y=parseFloat(first_number.substring(0,first_number.indexOf('/')));
+
+    }
+
+
+    
 }
 
 function changeHighlighted(changeClass){
@@ -52,6 +74,45 @@ function calculate(){
 
 }
 
+function calculate2(){
+
+    let second_number=document.getElementById('screen').value;
+    second_number=second_number.replace(',','.');
+    if(second_number.includes('+')){
+        z=parseFloat(second_number.substring(second_number.indexOf('+')+1,second_number.length));
+        result=y+z;
+
+    }
+    if(second_number.includes('-')){
+        z=parseFloat(second_number.substring(second_number.indexOf('-')+1,second_number.length));
+        result=y-z;
+
+    }
+    if(second_number.includes('x')){
+        z=parseFloat(second_number.substring(second_number.indexOf('x')+1,second_number.length));
+        result=y*z;
+
+    }
+    if(second_number.includes('/')){
+        z=parseFloat(second_number.substring(second_number.indexOf('/')+1,second_number.length));
+        result=y/z;
+
+    }
+    result=parseFloat(result);
+    result=result.toString();
+    result=result.replace('.', ',');
+
+
+    if(second_number=='Infinity' || second_number=='-Infinity' || !(second_number==second_number) || result=='Infinity'){
+        document.getElementById('screen').value='ERROR';
+    }
+    else{
+        document.getElementById('screen').value=result;
+    }
+
+
+}
+
 function changePlusMinus(){
 
     
@@ -78,7 +139,7 @@ function keyboard (TheEvent) {
     if (k==107) {returnValue('+'); changeHighlighted(document.getElementById('plus').classList)} 
     if (k==109) {returnValue('-'); changeHighlighted(document.getElementById('minus').classList)} 
     if (k==111) {returnValue('/'); changeHighlighted(document.getElementById('division').classList)} 
-    if (k==32 || k==13) {calculate()} //equal or space
+    if (k==32 || k==13) {calculate2()} //equal or space
     if (k==27) {eraseValue(" ")} //C
     
     }
