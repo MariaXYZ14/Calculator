@@ -1,6 +1,8 @@
 var y=null;
 var z=null;
 var result;
+var commas=',';
+
 
 window.onload = function(){ 
     pantalla=document.getElementById("textoPantalla"); 
@@ -19,29 +21,60 @@ function returnValue(x) {
 
     }
 
+
     let first_number =document.getElementById('screen').value;
     first_number=first_number.replace(',','.');
 
+    const commaActive = document.getElementById('comma');
+    commaActive.disabled = false; 
+     
+    if( first_number.includes(',')){
+   
+        commaActive.disabled = true; 
+        commas++;
+
+       
+    }
+    else{
+
+        commaActive.disabled = false; 
+
+    }
+
+    console.log(commas)
+
+
+
     if(first_number.includes('+')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('+')));
+        commaActive.disabled = false
+        /*if(commas<1){
+   
+            commaActive.disabled = true; 
+    
+           
+        }
+        else{
+    
+            commaActive.disabled = false; 
+    
+        }*/
+    
         
-
     }
     if(first_number.includes('-')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('-')));
-
+        commaActive.disabled = false
     }
     if(first_number.includes('x')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('x')));
-
+        commaActive.disabled = false
     }
     if (first_number.includes('/')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('/')));
-
+        commaActive.disabled = false
     }
 
-
-    
 }
 
 function changeHighlighted(changeClass){
@@ -80,22 +113,24 @@ function calculate2(){
 
     let second_number=document.getElementById('screen').value;
     second_number=second_number.replace(',','.');
+
+
     if(second_number.includes('+')){
         z=parseFloat(second_number.substring(second_number.indexOf('+')+1,second_number.length));
         result=y+z;
 
     }
-    if(second_number.includes('-')){
+    else if(second_number.includes('-')){
         z=parseFloat(second_number.substring(second_number.indexOf('-')+1,second_number.length));
         result=y-z;
 
     }
-    if(second_number.includes('x')){
+    else if(second_number.includes('x')){
         z=parseFloat(second_number.substring(second_number.indexOf('x')+1,second_number.length));
         result=y*z;
 
     }
-    if(second_number.includes('/')){
+    else if(second_number.includes('/')){
         z=parseFloat(second_number.substring(second_number.indexOf('/')+1,second_number.length));
         result=y/z;
 
@@ -116,6 +151,7 @@ function calculate2(){
 }
 
 function changePlusMinus(){
+   
     document.getElementById('screen').value=-document.getElementById('screen').value;
 
    /* if(document.getElementById('screen').value.includes('+')&&(y>0 ||y<0)){
