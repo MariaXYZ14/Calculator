@@ -1,7 +1,7 @@
 var y=null;
 var z=null;
 var result;
-var commas=',';
+var commas=0;
 
 
 window.onload = function(){ 
@@ -9,31 +9,32 @@ window.onload = function(){
     document.onkeydown = keyboard; }
 
 function returnValue(x) {
-   
+  
+    if(x=='/' || x=='x' ||x=='-'|| x=='+'){
+        commas=0;
+    }
 
     if(x==','  &&  document.getElementById('screen').value == 0){
         
         document.getElementById('screen').value+="0,";
-
     }else{
 
          document.getElementById('screen').value += x;
 
     }
 
-
     let first_number =document.getElementById('screen').value;
     first_number=first_number.replace(',','.');
-
+ 
     const commaActive = document.getElementById('comma');
     commaActive.disabled = false; 
-     
-    if( first_number.includes(',')){
+
+    if(first_number.includes('.')){
    
         commaActive.disabled = true; 
         commas++;
 
-       
+
     }
     else{
 
@@ -41,40 +42,124 @@ function returnValue(x) {
 
     }
 
-    console.log(commas)
-
-
-
     if(first_number.includes('+')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('+')));
         commaActive.disabled = false
-        /*if(commas<1){
+
+        let arr=Array.from(document.getElementById('screen').value);
+        commas=0;
+
+        for(i=0;i<first_number.length;i++){
+            if(arr[i]==','){ commas++;}
+               console.log(commas);
+
+            if(commas>0){
    
-            commaActive.disabled = true; 
-    
-           
+               commaActive.disabled = true; 
+        
+               
+            }
+            else{
+        
+                commaActive.disabled = false; 
+        
+            }
         }
-        else{
-    
-            commaActive.disabled = false; 
-    
-        }*/
+        
     
         
     }
     if(first_number.includes('-')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('-')));
         commaActive.disabled = false
+
+        let arr=Array.from(document.getElementById('screen').value);
+        commas=0;
+
+        for(i=0;i<first_number.length;i++){
+            if(arr[i]==','){ commas++;}
+               console.log(commas);
+
+            if(commas>0){
+   
+               commaActive.disabled = true; 
+        
+               
+            }
+            else{
+        
+                commaActive.disabled = false; 
+                
+        
+            }
+        }
     }
     if(first_number.includes('x')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('x')));
         commaActive.disabled = false
+
+        let arr=Array.from(document.getElementById('screen').value);
+        commas=0;
+
+        for(i=0;i<first_number.length;i++){
+            if(arr[i]==','){ commas++;}
+               console.log(commas);
+
+            if(commas>0){
+   
+               commaActive.disabled = true; 
+        
+               
+            }
+            else{
+        
+                commaActive.disabled = false; 
+        
+            }
+        }
     }
     if (first_number.includes('/')){
         y=parseFloat(first_number.substring(0,first_number.indexOf('/')));
         commaActive.disabled = false
+        console.log(first_number.indexOf('/')+1);
+
+     //   console.log(commas);
+            
+            if(x==',' && commas==0){
+               
+                commas++;
+               
+            }
+        
+            if(commas>0){
+                commaActive.disabled = true; 
+
+            }
+            else if(commas==0){
+                commaActive.disabled = false; 
+
+            }
+        
     }
 
+
+    
+    if(document.getElementById('screen').value.includes('+')){
+        z=parseFloat(document.getElementById('screen').value.substring(document.getElementById('screen').value.indexOf('+')+1,document.getElementById('screen').value.length));
+
+    }
+    else if(document.getElementById('screen').value.includes('-')){
+        z=parseFloat(document.getElementById('screen').value.substring(document.getElementById('screen').value.indexOf('-')+1,document.getElementById('screen').value.length));
+
+    }
+    else if(document.getElementById('screen').value.includes('x')){
+        z=parseFloat(document.getElementById('screen').value.substring(document.getElementById('screen').value.indexOf('x')+1,document.getElementById('screen').value.length));
+
+    }
+    else if(document.getElementById('screen').value.includes('/')){
+        z=parseFloat(document.getElementById('screen').value.substring(document.getElementById('screen').value.indexOf('/')+1,document.getElementById('screen').value.length));
+
+    }
 }
 
 function changeHighlighted(changeClass){
@@ -92,6 +177,7 @@ function removeHighlighted(){
 
 function eraseValue(x) {
     removeHighlighted();
+    commas=0;
     document.getElementById('screen').value = x;
     document.getElementById('screen').placeholder = "0";
 
@@ -110,7 +196,7 @@ function calculate(){
 }
 
 function calculate2(){
-
+    commas=0;
     let second_number=document.getElementById('screen').value;
     second_number=second_number.replace(',','.');
 
@@ -151,66 +237,52 @@ function calculate2(){
 }
 
 function changePlusMinus(){
-   
-    document.getElementById('screen').value=-document.getElementById('screen').value;
 
-   /* if(document.getElementById('screen').value.includes('+')&&(y>0 ||y<0)){
-        if(y>0){
-            y=-y;
-        }
-        else if(y<0){
-            y=-y; 
-        }
+    if(document.getElementById('screen').value.includes('+') && ! isNaN(z)){
+         
+        document.getElementById('screen').value=y+"-"+z;
+    }
+    else if(document.getElementById('screen').value.includes('+')){
         
         document.getElementById('screen').value=y+"+";
 
     }
-    else if(document.getElementById('screen').value.includes('-')&&(y>0 ||y<0)){
-        if(y>0){
-            y=-y;
-        }
-        else if(y<0){
-            y=-y; 
-        }
-        document.getElementById('screen').value=y+"-";
+    else if(document.getElementById('screen').value.includes('-')  && ! isNaN(z)){
+
+        document.getElementById('screen').value=y+"+"+z;
+        console.log("hello");
     }
-    else if(document.getElementById('screen').value.includes('x')&&(y>0 ||y<0)){
+    else if(document.getElementById('screen').value.includes('-')){
         
-        if(y>0){
-            y=-y;
-        }
-        else if(y<0){
-            y=-y; 
-        }
-        
+        document.getElementById('screen').value=y+"-";
+
+    }
+    else if(document.getElementById('screen').value.includes('x')   && ! isNaN(z)){
+
+        document.getElementById('screen').value=y+"x"+-z;
+    }
+
+    else if(document.getElementById('screen').value.includes('x')){
+
         document.getElementById('screen').value=y+"x";
     }
-     else if(document.getElementById('screen').value.includes('/')&&(y>0 ||y<0)){
-        
-        
-        if(y>0){
-            y=-y;
-        }
-        else if(y<0){
-            y=-y; 
-        }
-        
+
+    else if(document.getElementById('screen').value.includes('/')   && ! isNaN(z)){
+
+        document.getElementById('screen').value=y+"/"+-z;
+    }
+    else if(document.getElementById('screen').value.includes('/')){
+
         document.getElementById('screen').value=y+"/";
-        
-    } 
-    
+    }
     else{
         document.getElementById('screen').value=-document.getElementById('screen').value;
 
-    }*/
+    }
 
-    /*   if((document.getElementById('screen').value.indexOf('+')+1)!=null){
-        document.getElementById('screen').value=y+"-"+(-z);
-
-    }*/
-    
-    console.log(y);
    
+
+      
 }
 
 function keyboard (TheEvent) { 
