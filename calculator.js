@@ -221,6 +221,7 @@ function calculate2(){
         result=y/z;
 
     }
+    
     result=parseFloat(result);
     result=result.toString();
     result=result.replace('.', ',');
@@ -238,6 +239,8 @@ function calculate2(){
 
 function changePlusMinus(){
 
+    console.log(document.getElementById('screen').value.indexOf('-'));
+
     if(document.getElementById('screen').value.includes('+') && ! isNaN(z)){
          
         document.getElementById('screen').value=y+"-"+z;
@@ -252,16 +255,18 @@ function changePlusMinus(){
         document.getElementById('screen').value=y+"+"+z;
         console.log("hello");
     }
-    else if(document.getElementById('screen').value.includes('-')){
+    else if(document.getElementById('screen').value.includes('-') && document.getElementById('screen').value.indexOf('-')!=0){
         
         document.getElementById('screen').value=y+"-";
 
     }
     else if(document.getElementById('screen').value.includes('x')   && ! isNaN(z)){
+        z=-z;
 
-        document.getElementById('screen').value=y+"x"+-z;
+        document.getElementById('screen').value=y+"x"+z;
+        console.log(z);
+
     }
-
     else if(document.getElementById('screen').value.includes('x')){
 
         document.getElementById('screen').value=y+"x";
@@ -269,13 +274,17 @@ function changePlusMinus(){
 
     else if(document.getElementById('screen').value.includes('/')   && ! isNaN(z)){
 
-        document.getElementById('screen').value=y+"/"+-z;
+        z=-z;
+        document.getElementById('screen').value=y+"/"+z;
+        console.log(z);
     }
     else if(document.getElementById('screen').value.includes('/')){
 
         document.getElementById('screen').value=y+"/";
+        
     }
     else{
+
         document.getElementById('screen').value=-document.getElementById('screen').value;
 
     }
@@ -308,5 +317,6 @@ function keyboard (TheEvent) {
     if (k==111) {returnValue('/'); changeHighlighted(document.getElementById('division').classList)} 
     if (k==32 || k==13) {calculate2()} //equal or space
     if (k==27) {eraseValue(" ")} //C
+    if( k==17){ changePlusMinus()}
     
     }
