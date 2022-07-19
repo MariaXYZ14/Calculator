@@ -1,6 +1,7 @@
 let first_number;
 let second_number;
 let operation='';
+let deleteScreen=false;
 
 window.onload = function(){ 
     pantalla=document.getElementById("textoPantalla"); 
@@ -11,8 +12,12 @@ function clickNumber(number){
    
     let screen=document.getElementById('screen');
 
-
-    if(screen.value == 0){
+    if(deleteScreen){
+      
+        screen.value=number;
+        deleteScreen=false;
+    }
+    else if(screen.value == 0){
         
         screen.value = number;
 
@@ -46,7 +51,12 @@ function clickComma(){
     
     let screen=document.getElementById('screen');
 
-    if(screen.value.includes(',')){
+    if(deleteScreen){
+
+        screen.value='0,';
+        deleteScreen=false;
+    }    
+    else if(screen.value.includes(',')){
         return;
     }
     else if(calculateLength(screen.value)>=10) {
@@ -66,7 +76,7 @@ function changePlusMinus(){
     
     let screen=document.getElementById('screen');
 
-    if(screen.value=='' ||screen.value==0 || screen.value=='0,'){
+    if(screen.value=='' ||screen.value==0 || screen.value=='0,' || deleteScreen){
  
         return;
     }else{
@@ -92,7 +102,7 @@ function clickOperation(operator){
     
         first_number=screen.value;
     
-        screen.value='0';  
+        deleteScreen=true;
     }
     else{
        
@@ -103,7 +113,7 @@ function clickOperation(operator){
 
         operation=operator;
 
-        screen.value='0';  
+        deleteScreen=true;
 
        
     }
@@ -113,13 +123,22 @@ function clickOperation(operator){
 }
 
 function calculate(){
-    
     let screen=document.getElementById('screen');
+
+    
+    if(deleteScreen){
+
+        screen.value='ERROR';
+
+    }
+    else if(operation==''){
+        screen.value='ERROR';
+    }
+    else{
     let result;
     let num1;
     let num2='';
     removeHighlighted();
-
 
     second_number=screen.value;
 
@@ -150,24 +169,21 @@ function calculate(){
         result=num1/num2;
 
     }
-    else if( num2=='' && operation==''){
-        screen=num1;
-    }
-    else if(num2==''){
-        screen.value=convertToString(result);
-        result='ERROR';
-    }
 
     operation='';
 
     screen.value=convertToString(result);
-    
+    }
 }
 
 function eraseValue(){
     removeHighlighted();
     let screen=document.getElementById('screen');
-    screen.value="0";    
+    screen.value="0"; 
+    deleteScreen=false;
+    first_number='';
+    second_number='';
+    operation='';   
 }
 
 function convertToNumber(text){
