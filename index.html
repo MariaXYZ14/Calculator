@@ -12,33 +12,33 @@
     <body>
         <div id="main-calculator">
             <h1 id="title">Calculator</h1>
-            <input type="text" id="screen" placeholder="0" value="" disabled><br>
+            <input type="text" id="screen"  value="0" disabled><br>
 
             <div class="w3-container">
 
-                <button id="seven" class="numbers" value="7" onclick="returnValue(this.value)">7</button>
-                <button id="eight" class="numbers" value="8" onclick="returnValue(this.value)">8</button>
-                <button id="nine"  class="numbers" value="9" onclick="returnValue(this.value)">9</button>
+                <button id="seven" class="numbers" value="7" onclick="clickNumber(this.value)">7</button>
+                <button id="eight" class="numbers" value="8" onclick="clickNumber(this.value)">8</button>
+                <button id="nine"  class="numbers" value="9" onclick="clickNumber(this.value)">9</button>
 
-                <button id="four"  class="numbers" value="4" onclick="returnValue(this.value)">4</button>
-                <button id="five"  class="numbers" value="5" onclick="returnValue(this.value)">5</button>
-                <button id="six"   class="numbers" value="6" onclick="returnValue(this.value)">6</button>
+                <button id="four"  class="numbers" value="4" onclick="clickNumber(this.value)">4</button>
+                <button id="five"  class="numbers" value="5" onclick="clickNumber(this.value)">5</button>
+                <button id="six"   class="numbers" value="6" onclick="clickNumber(this.value)">6</button>
 
-                <button id="one"   class="numbers" value="1" onclick="returnValue(this.value)">1</button>
-                <button id="two"   class="numbers" value="2" onclick="returnValue(this.value)">2</button>
-                <button id="three" class="numbers" value="3" onclick="returnValue(this.value)">3</button>
+                <button id="one"   class="numbers" value="1" onclick="clickNumber(this.value)">1</button>
+                <button id="two"   class="numbers" value="2" onclick="clickNumber(this.value)">2</button>
+                <button id="three" class="numbers" value="3" onclick="clickNumber(this.value)">3</button>
 
-                <button id="zero"  class="numbers" value="0" onclick="returnValue(this.value)">0</button>
+                <button id="zero"  class="numbers" value="0" onclick="clickNumber(this.value)">0</button>
 
-                <button id="comma"  value=","  onclick="returnValue(this.value)">,</button>
+                <button id="comma"  value=","  onclick="clickComma()">,</button>
 
-                <button id="division" class="operation" value="/" onclick="returnValue(this.value);changeHighlighted(event.currentTarget.classList)">/</button>
-                <button id="multiply" class="operation" value="x" onclick="returnValue(this.value);changeHighlighted(event.currentTarget.classList)">x</button>
-                <button id="minus"    class="operation" value="-" onclick="returnValue(this.value);changeHighlighted(event.currentTarget.classList)">-</button>
-                <button id="plus"     class="operation" value="+" onclick="returnValue(this.value);changeHighlighted(event.currentTarget.classList)">+</button>
-                <button id="equal"    class="operation" value="=" onclick="calculate2()">=</button>
+                <button id="division" class="operation" value="/" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">/</button>
+                <button id="multiply" class="operation" value="x" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">x</button>
+                <button id="minus"    class="operation" value="-" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">-</button>
+                <button id="plus"     class="operation" value="+" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">+</button>
+                <button id="equal"    class="operation" value="=" onclick="calculate()">=</button>
                 
-                <button id="C" value=" " onclick="eraseValue(this.value)">C</button> 
+                <button id="C" onclick="eraseValue()">C</button> 
                 <button id="plus-minus" onclick="changePlusMinus()">+/-</button>
 
             </div>
