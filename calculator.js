@@ -26,7 +26,6 @@ function clickNumber(number){
 
     }
     else if(calculateLength(screen.value)>=10){
-
         return;
     }
     else if(screen.value!=null && third_number){
@@ -37,6 +36,7 @@ function clickNumber(number){
     else{
 
         screen.value += number;
+        if(calculateLength(screen.value)>=10){disabledNumbers();}
 
     }
     
@@ -71,6 +71,7 @@ function clickComma(){
         return;
     }
     else if(calculateLength(screen.value)>=10) {
+        disabledNumbers();
         return;
 
     }
@@ -105,7 +106,7 @@ function changePlusMinus(){
 }
 
 function clickOperation(operator){
-    
+    activedNumbers();
     activedComma();
     disabledPlusMinus();
     NonOperation=false;
@@ -261,6 +262,13 @@ function activedPlusMinus(){
 
 function disabledButtons(){
 
+    disabledNumbers();
+    disabledOperators();
+
+}
+
+function disabledNumbers(){
+    
     var elementsNumbers = document.querySelectorAll(".numbers");
     var index = 0, length = elementsNumbers.length;
 
@@ -271,6 +279,13 @@ function disabledButtons(){
         elementsNumbers[index].disabled = true;
 
     }
+
+    disabledComma();
+    disabledPlusMinus();
+}
+
+function disabledOperators(){
+   
     var elementsOperations = document.querySelectorAll(".operation");
     var index2 = 0, length = elementsOperations.length;
 
@@ -283,23 +298,12 @@ function disabledButtons(){
         elementsOperations[index2].disabled = true;
 
     }
-    disabledComma();
-    disabledPlusMinus();
-
 }
 
 function activedButtons(){
   
-    var elementsNumbers = document.querySelectorAll(".numbers");
-    var index = 0, length = elementsNumbers.length;
+    activedNumbers();
 
-    for ( ; index < length; index++) {
-        elementsNumbers[index].style.backgroundColor = "rgb(29, 191, 240)";
-        elementsNumbers[index].style.cursor = "pointer";
-        elementsNumbers[index].style.color = "black";
-        elementsNumbers[index].disabled = false;
-
-    }
     var elementsOperations = document.querySelectorAll(".operation");
     var index2 = 0, length = elementsOperations.length;
 
@@ -315,6 +319,21 @@ function activedButtons(){
     activedComma();
     activedPlusMinus();
 
+
+}
+
+function activedNumbers(){
+
+    var elementsNumbers = document.querySelectorAll(".numbers");
+    var index = 0, length = elementsNumbers.length;
+
+    for ( ; index < length; index++) {
+        elementsNumbers[index].style.backgroundColor = "rgb(29, 191, 240)";
+        elementsNumbers[index].style.cursor = "pointer";
+        elementsNumbers[index].style.color = "black";
+        elementsNumbers[index].disabled = false;
+
+    }
 
 }
 
