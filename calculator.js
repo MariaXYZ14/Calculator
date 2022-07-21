@@ -3,7 +3,7 @@ let second_number;
 let operation='';
 let deleteScreen=false;
 let third_number=false;
-let NonOperation=false;
+let NonOperation=true;
 
 window.onload = function(){ 
     pantalla=document.getElementById("textoPantalla"); 
@@ -11,7 +11,8 @@ window.onload = function(){
 
 
 function clickNumber(number){
-
+   
+    activedPlusMinus();
     let screen=document.getElementById('screen');
 
     if(deleteScreen){
@@ -38,6 +39,7 @@ function clickNumber(number){
         screen.value += number;
 
     }
+    
 }
 
 function calculateLength(len){
@@ -55,15 +57,17 @@ function calculateLength(len){
 
 function clickComma(){
     
-    
     let screen=document.getElementById('screen');
+    disabledComma();
+    disabledPlusMinus();
 
     if(deleteScreen){
-
         screen.value='0,';
         deleteScreen=false;
+
     }    
     else if(screen.value.includes(',')){
+            
         return;
     }
     else if(calculateLength(screen.value)>=10) {
@@ -71,7 +75,7 @@ function clickComma(){
 
     }
     else if(screen.value==''){
-
+        
         screen.value="0,";
     }
     else{
@@ -101,7 +105,10 @@ function changePlusMinus(){
 }
 
 function clickOperation(operator){
-
+    
+    activedComma();
+    disabledPlusMinus();
+    NonOperation=false;
 
     if(operation==''){
         let screen=document.getElementById('screen');
@@ -132,17 +139,26 @@ function clickOperation(operator){
 function calculate(){
 
     third_number=true;
+    disabledPlusMinus();
+
 
     let screen=document.getElementById('screen');
 
-    
+    if(NonOperation){
+
+        screen.value=num1;
+        NonOperation=false;
+    }
+
     if(deleteScreen){
 
         screen.value='ERROR';
+        disabledButtons();
 
     }
     else if(operation==''){
         screen.value='ERROR';
+        disabledButtons();
     }
     else{
         
@@ -155,7 +171,8 @@ function calculate(){
     num1=convertToNumber(first_number);
     num2=convertToNumber(second_number);
 
-    
+   
+
     if(operation=='+'){
        
         result=num1+num2;
@@ -177,11 +194,7 @@ function calculate(){
         result=num1/num2;
 
     }
-    else if(num2==''){
-
-        result=num1;
-    }
-
+    
     operation='';
 
     screen.value=convertToString(result);
@@ -195,13 +208,114 @@ function shout(){
 }
 
 function eraseValue(){
+    activedComma();
     removeHighlighted();
+    activedPlusMinus();
+    activedButtons();
     let screen=document.getElementById('screen');
     screen.value="0"; 
     deleteScreen=false;
     first_number='';
     second_number='';
     operation='';   
+}
+
+//disabling
+
+function disabledComma(){
+
+    document.getElementById("comma").style.backgroundColor = "#FF0000";
+    document.getElementById("comma").style.cursor = "not-allowed";
+    document.getElementById("comma").style.color = "black";
+    document.getElementById("comma").disabled= true;
+
+
+}
+
+function activedComma(){
+
+    document.getElementById("comma").style.backgroundColor = "#12a6d3";
+    document.getElementById("comma").style.cursor = "pointer";
+    document.getElementById("comma").style.color = "black";
+    document.getElementById("comma").disabled= false;
+
+
+}
+
+function disabledPlusMinus(){
+    document.getElementById("plus-minus").style.backgroundColor = "#FF0000";
+    document.getElementById("plus-minus").style.color = "black";
+    document.getElementById("plus-minus").style.cursor = "not-allowed";
+    document.getElementById("plus-minus").disabled = true;
+ 
+}
+
+function activedPlusMinus(){
+
+    document.getElementById("plus-minus").style.backgroundColor = "rgb(255, 255, 255)";
+    document.getElementById("plus-minus").style.color = "black";
+    document.getElementById("plus-minus").style.cursor = "pointer";
+    document.getElementById("plus-minus").disabled = false;
+
+}
+
+function disabledButtons(){
+
+    var elementsNumbers = document.querySelectorAll(".numbers");
+    var index = 0, length = elementsNumbers.length;
+
+    for ( ; index < length; index++) {
+        elementsNumbers[index].style.backgroundColor = "#FF0000";
+        elementsNumbers[index].style.cursor = "not-allowed";
+        elementsNumbers[index].style.color = "black";
+        elementsNumbers[index].disabled = true;
+
+    }
+    var elementsOperations = document.querySelectorAll(".operation");
+    var index2 = 0, length = elementsOperations.length;
+
+  
+    for ( ; index2 < length; index2++) {
+
+        elementsOperations[index2].style.backgroundColor = "#FF0000";
+        elementsOperations[index2].style.cursor = "not-allowed";
+        elementsOperations[index2].style.color = "black";
+        elementsOperations[index2].disabled = true;
+
+    }
+    disabledComma();
+    disabledPlusMinus();
+
+}
+
+function activedButtons(){
+  
+    var elementsNumbers = document.querySelectorAll(".numbers");
+    var index = 0, length = elementsNumbers.length;
+
+    for ( ; index < length; index++) {
+        elementsNumbers[index].style.backgroundColor = "rgb(29, 191, 240)";
+        elementsNumbers[index].style.cursor = "pointer";
+        elementsNumbers[index].style.color = "black";
+        elementsNumbers[index].disabled = false;
+
+    }
+    var elementsOperations = document.querySelectorAll(".operation");
+    var index2 = 0, length = elementsOperations.length;
+
+  
+    for ( ; index2 < length; index2++) {
+
+        elementsOperations[index2].style.backgroundColor = "rgb(255, 255, 255)";
+        elementsOperations[index2].style.cursor = "pointer";
+        elementsOperations[index2].style.color = "black";
+        elementsOperations[index2].disabled = false;
+
+    }
+    activedComma();
+    activedPlusMinus();
+
+
 }
 
 function convertToNumber(text){
@@ -212,7 +326,7 @@ function convertToNumber(text){
 function convertToString(num){
 
     if(num=='Infinity' || num=='-Infinity' || !(num==num)){
-        
+        disabledButtons();
         return "ERROR";
 
     }
@@ -225,7 +339,7 @@ function convertToString(num){
     console.log(calculateLength(num.toString()));
 
     if(Math.abs(num) >= 9999999999.5){
-       
+        disabledButtons();
         return "ERROR";
 
 
