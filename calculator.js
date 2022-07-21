@@ -2,6 +2,8 @@ let first_number;
 let second_number;
 let operation='';
 let deleteScreen=false;
+let third_number=false;
+let NonOperation=false;
 
 window.onload = function(){ 
     pantalla=document.getElementById("textoPantalla"); 
@@ -9,7 +11,7 @@ window.onload = function(){
 
 
 function clickNumber(number){
-   
+
     let screen=document.getElementById('screen');
 
     if(deleteScreen){
@@ -25,6 +27,11 @@ function clickNumber(number){
     else if(calculateLength(screen.value)>=10){
 
         return;
+    }
+    else if(screen.value!=null && third_number){
+        screen.value = number;
+        third_number=false;
+
     }
     else{
 
@@ -123,6 +130,9 @@ function clickOperation(operator){
 }
 
 function calculate(){
+
+    third_number=true;
+
     let screen=document.getElementById('screen');
 
     
@@ -135,18 +145,16 @@ function calculate(){
         screen.value='ERROR';
     }
     else{
+        
     let result;
     let num1;
     let num2='';
-    removeHighlighted();
 
     second_number=screen.value;
 
     num1=convertToNumber(first_number);
     num2=convertToNumber(second_number);
 
-   
-    console.log(operation);
     
     if(operation=='+'){
        
@@ -159,21 +167,31 @@ function calculate(){
         result=num1-num2;
 
     }
-    if(operation=='x'){
+    else if(operation=='x'){
        
         result=num1*num2;
 
     }
-    if(operation=='/'){
+    else if(operation=='/'){
         
         result=num1/num2;
 
+    }
+    else if(num2==''){
+
+        result=num1;
     }
 
     operation='';
 
     screen.value=convertToString(result);
+
+    
     }
+}
+
+function shout(){
+
 }
 
 function eraseValue(){
@@ -194,10 +212,34 @@ function convertToNumber(text){
 function convertToString(num){
 
     if(num=='Infinity' || num=='-Infinity' || !(num==num)){
+        
         return "ERROR";
+
     }
 
-    return num.toFixed(10-contZero(num)).toString().replace('.',',');
+    //let cadena = num.toFixed(10);
+
+    //console.log('hello ' + cadena + ' : ' + calculateLength(cadena));
+
+    console.log(contEnters(num));
+    console.log(calculateLength(num.toString()));
+
+    if(Math.abs(num) >= 9999999999.5){
+       
+        return "ERROR";
+
+
+    }else if(contZero(num)==0){
+        
+        console.log("case1");
+        return num.toFixed(10-contEnters(num)).toString().replace('.',',');
+
+    }
+    else{
+        return num.toFixed(10-contZero(num)).toString().replace('.',',');
+
+    }
+
 }
 
 function contZero(num){
@@ -216,6 +258,19 @@ function contZero(num){
     }
 
     return zeros;
+}
+
+
+function contEnters(num){
+    let cadena=num.toFixed(10).toString();
+    let enters=cadena.indexOf('.');
+
+    if(cadena[0]=='-'){
+
+        enters--;
+    }
+    return enters;
+
 }
 
 function changeHighlighted(changeClass){
@@ -247,12 +302,12 @@ function keyboard (TheEvent) {
        clickNumber(p);
        }
 
-    if (k==110 || k==190) {clickComma()} 
+    if (k==110 || k==188) {clickComma()} 
     if (k==106 || k==88) {clickOperation('x'); changeHighlighted(document.getElementById('multiply').classList)} 
-    if (k==107) {clickOperation('+'); changeHighlighted(document.getElementById('plus').classList)} 
+    if (k==107 ) {clickOperation('+'); changeHighlighted(document.getElementById('plus').classList)} 
     if (k==109) {clickOperation('-'); changeHighlighted(document.getElementById('minus').classList)} 
     if (k==111) {clickOperation('/'); changeHighlighted(document.getElementById('division').classList)} 
-    if (k==32 || k==13) {calculate()} //equal or space
+    if (k==32 || k==13 || k==187) {calculate()} //equal or space
     if (k==27) {eraseValue()} //C
     if( k==17){ changePlusMinus()}
     
