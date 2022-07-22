@@ -190,7 +190,7 @@ function calculate(){
         result=num1/num2;
 
     }
-    else{}
+    
     
     operation='';
 
