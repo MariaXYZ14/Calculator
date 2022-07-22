@@ -21,6 +21,7 @@ function clickNumber(number){
       
         screen.value=number;
         deleteScreen=false;
+
     }
     else if(screen.value == 0){
         
@@ -400,8 +401,10 @@ function contZero(num){
     let point = cadena.length-1;
 
     while(cadena[point] == '0'){
+
         zeros++;
         point--;
+
     }
 
     return zeros;
@@ -420,7 +423,6 @@ function contEnters(num){
     }
 
     return enters;
-
 
 }
 
