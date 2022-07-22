@@ -408,7 +408,8 @@ function changeHighlighted(changeClass){
 }
 
 function removeHighlighted(){
-    let changeClass=document.getElementsByClassName("oper");
+    
+    let changeClass=document.getElementsByClassName("changedOperationButtonClass");
     
     for(let index=0;index<changeClass.length;index++){
         changeClass[index].classList.remove("operation2");
