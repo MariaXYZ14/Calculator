@@ -202,7 +202,6 @@ function calculate(){
 
 function eraseValue(){
     activedComma();
-    removeHighlighted();
     activedPlusMinus();
     activedButtons();
     let screen=document.getElementById('screen');
@@ -284,10 +283,21 @@ function disabledOperators(){
   
     for ( ; index2 < length; index2++) {
 
-        elementsOperations[index2].style.backgroundColor = "#FF0000";
-        elementsOperations[index2].style.cursor = "not-allowed";
-        elementsOperations[index2].style.color = "black";
+        elementsOperations[index2].classList.remove("operation");
+        elementsOperations[index2].classList.add("operationRed");
         elementsOperations[index2].disabled = true;
+
+    }
+
+    var elementsOperations2 = document.querySelectorAll(".operation2");
+    var index3 = 0, length = elementsOperations2.length;
+
+  
+    for ( ; index3 < length; index3++) {
+
+        elementsOperations2[index3].classList.remove("operation2");
+        elementsOperations2[index3].classList.add("operationRed");
+        elementsOperations2[index3].disabled = true;
 
     }
 }
@@ -296,18 +306,18 @@ function activedButtons(){
   
     activedNumbers();
 
-    var elementsOperations = document.querySelectorAll(".operation");
+    var elementsOperations = document.querySelectorAll(".operationRed");
     var index2 = 0, length = elementsOperations.length;
 
   
     for ( ; index2 < length; index2++) {
 
-        elementsOperations[index2].style.backgroundColor = "rgb(255, 255, 255)";
-        elementsOperations[index2].style.cursor = "pointer";
-        elementsOperations[index2].style.color = "black";
+        elementsOperations[index2].classList.remove("operationRed");
+        elementsOperations[index2].classList.add("operation");
         elementsOperations[index2].disabled = false;
 
     }
+
     activedComma();
     activedPlusMinus();
 
@@ -392,13 +402,18 @@ function contEnters(num){
 
 function changeHighlighted(changeClass){
     removeHighlighted();
+    changeClass.remove("operation");
     changeClass.add("operation2");
+    
 }
 
 function removeHighlighted(){
-    let changeClass=document.getElementsByClassName("operation");
+    let changeClass=document.getElementsByClassName("oper");
+    
     for(let index=0;index<changeClass.length;index++){
         changeClass[index].classList.remove("operation2");
+        changeClass[index].classList.add("operation");
+
     }
     
 }
@@ -424,8 +439,8 @@ function keyboard (TheEvent) {
     if (k==107 ) {clickOperation('+'); changeHighlighted(document.getElementById('plus').classList)} 
     if (k==109) {clickOperation('-'); changeHighlighted(document.getElementById('minus').classList)} 
     if (k==111) {clickOperation('/'); changeHighlighted(document.getElementById('division').classList)} 
-    if (k==32 || k==13 || k==187) {calculate()} //equal or space
-    if (k==27) {eraseValue()} //C
+    if (k==32 || k==13 || k==187) {calculate();removeHighlighted();} //equal or space
+    if (k==27) {eraseValue();removeHighlighted();} //C
     if( k==17){ changePlusMinus()}
     
     }

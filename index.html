@@ -32,13 +32,13 @@
 
                 <button id="comma"  value=","  onclick="clickComma()">,</button>
 
-                <button id="division" class="operation" value="/" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">/</button>
-                <button id="multiply" class="operation" value="x" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">x</button>
-                <button id="minus"    class="operation" value="-" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">-</button>
-                <button id="plus"     class="operation" value="+" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">+</button>
-                <button id="equal"    class="operation" value="=" onclick="calculate();removeHighlighted();">=</button>
+                <button id="division" class="operation oper" value="/" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">/</button>
+                <button id="multiply" class="operation oper" value="x" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">x</button>
+                <button id="minus"    class="operation oper" value="-" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">-</button>
+                <button id="plus"     class="operation oper" value="+" onclick="clickOperation(this.value);changeHighlighted(event.currentTarget.classList)">+</button>
+                <button id="equal"    class="operation oper" value="=" onclick="calculate();removeHighlighted();">=</button>
                 
-                <button id="C" onclick="eraseValue()">C</button> 
+                <button id="C" onclick="eraseValue();removeHighlighted();">C</button> 
                 <button id="plus-minus" onclick="changePlusMinus()">+/-</button>
 
             </div>

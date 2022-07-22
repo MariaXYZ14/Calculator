@@ -168,6 +168,23 @@ body{
 
 }
 
+.operationRed{
+
+    position:relative;
+    height:70px;
+    width:70px;
+    border-radius:50%;
+    background-color: #FF0000;
+    display:inline-block;
+    margin:40px 80px 0px 80px;
+    top:-465px;
+    left:280px;
+    font-size:30px;
+    color: black;
+
+
+}
+
 .operation:hover{
 
     opacity:70%;
@@ -175,6 +192,12 @@ body{
     transform: scale(1.05);
 }
 
+.operationRed:hover{
+
+    opacity:70%;
+    cursor:not-allowed;
+    transform: scale(1.05);
+}
 
 #C{
 
