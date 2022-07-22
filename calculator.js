@@ -3,7 +3,6 @@ let second_number;
 let operation='';
 let deleteScreen=false;
 let third_number=false;
-let NonOperation=true;
 
 window.onload = function(){ 
     pantalla=document.getElementById("textoPantalla"); 
@@ -109,9 +108,9 @@ function clickOperation(operator){
     activedNumbers();
     activedComma();
     disabledPlusMinus();
-    NonOperation=false;
 
-    if(operation==''){
+    if(operation=='' || operation=='+' || operation=='-' || operation=='x' || operation=='/'){
+      
         let screen=document.getElementById('screen');
         operation=operator;
     
@@ -141,15 +140,7 @@ function calculate(){
 
     third_number=true;
     disabledPlusMinus();
-
-
     let screen=document.getElementById('screen');
-
-    if(NonOperation){
-
-        screen.value=num1;
-        NonOperation=false;
-    }
 
     if(deleteScreen){
 
@@ -158,8 +149,12 @@ function calculate(){
 
     }
     else if(operation==''){
-        screen.value='ERROR';
-        disabledButtons();
+      
+        if(screen.value[screen.value.length-1]==','){
+        
+            screen.value=screen.value.substring(0,screen.value.length-1);
+    
+        }
     }
     else{
         
@@ -195,6 +190,7 @@ function calculate(){
         result=num1/num2;
 
     }
+    else{}
     
     operation='';
 
@@ -202,10 +198,6 @@ function calculate(){
 
     
     }
-}
-
-function shout(){
-
 }
 
 function eraseValue(){
@@ -343,19 +335,12 @@ function convertToNumber(text){
 }
 
 function convertToString(num){
-
+   
     if(num=='Infinity' || num=='-Infinity' || !(num==num)){
         disabledButtons();
         return "ERROR";
 
     }
-
-    //let cadena = num.toFixed(10);
-
-    //console.log('hello ' + cadena + ' : ' + calculateLength(cadena));
-
-    console.log(contEnters(num));
-    console.log(calculateLength(num.toString()));
 
     if(Math.abs(num) >= 9999999999.5){
         disabledButtons();
@@ -364,10 +349,9 @@ function convertToString(num){
 
     }else if(contZero(num)==0){
         
-        console.log("case1");
         return num.toFixed(10-contEnters(num)).toString().replace('.',',');
 
-    }
+    } 
     else{
         return num.toFixed(10-contZero(num)).toString().replace('.',',');
 
@@ -395,7 +379,7 @@ function contZero(num){
 
 
 function contEnters(num){
-    let cadena=num.toFixed(10).toString();
+    let cadena=num.toFixed(10);
     let enters=cadena.indexOf('.');
 
     if(cadena[0]=='-'){
