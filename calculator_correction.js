@@ -1,19 +1,26 @@
 let first_number;
 let second_number;
-let operation='';
+let operation = '';
 let deleteScreen = false;
 let third_number = false;
 
 window.onload = function(){ 
-    
-    pantalla = document.getElementById("textoPantalla"); 
+
+    pantalla = document.getElementById("screen"); 
     document.onkeydown = keyboard; 
+
+}
+
+function getScreen()
+{}
+
+function setScreen(newValue) {
 
 }
 
 function clickNumber(number){
    
-    activedPlusMinus();
+    activedPlusMinus(); //activatePlusMinus;
     
     let screen = document.getElementById('screen');
 
@@ -42,22 +49,26 @@ function clickNumber(number){
     else{
 
         screen.value += number;
-        if(calculateLength(screen.value) >= 10){ disabledNumbers();}
+        if(calculateLength(screen.value) >= 10){ 
+            
+            disabledNumbers()
+            
+        ;}
 
     }
     
 }
 
-function calculateLength(len){
+function calculateLength(num){
 
     let result = 0;
 
-    for(let i = 0;i<len.length;i++){
+    for(let i = 0;i < len.length;i++){
 
         if(len[i] != ',' && len[i] != '-'){result++;}
 
     }
-        return result;
+    return result;
 
 }
 
@@ -76,13 +87,13 @@ function clickComma(){
     }    
     else if(screen.value.includes(',')){
             
-        return;
+        
 
     }
     else if(calculateLength(screen.value) >= 10) {
         
         disabledNumbers();
-        return;
+        
 
     }
     else if(screen.value == ''){
@@ -123,6 +134,8 @@ function changePlusMinus(){
 
 function clickOperation(operator){
     
+//setEnabledButton('/', true);
+
     activedNumbers();
     activedComma();
     disabledPlusMinus();
