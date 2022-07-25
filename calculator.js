@@ -5,8 +5,8 @@ let deleteScreen = false;
 let third_number = false;
 
 window.onload = function(){ 
-    
-    pantalla = document.getElementById("textoPantalla"); 
+
+    pantalla = document.getElementById("screen"); 
     document.onkeydown = keyboard; 
 
 }
