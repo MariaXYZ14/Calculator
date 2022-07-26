@@ -120,25 +120,25 @@ function clickComma(){
     }
 }
 
-//por revisar
+
 
 function clickPlusMinus(){
     
-    let screen = document.getElementById('screen');
+    let screen = getScreen();
 
-    if(screen.value == '' ||screen.value == 0 || screen.value == '0,' || IsDeletedScreen){
+    if(screen == '' || screen == 0 || screen == '0,' || IsDeletedScreen){
  
         return;
 
     }else{
 
-        if(screen.value[0] == '-'){
-
-            screen.value = screen.value.substring(1,screen.value.length);
+        if(screen[0] == '-'){
+        
+            setScreen(screen.substring(1,screen.length))
 
         }else{
 
-            screen.value = screen.value = '-' + screen.value;
+            setScreen('-'+ screen);
 
         }
 
@@ -170,6 +170,8 @@ function clickOperation(NewOperation){
     }
         
 }
+
+//por revisar
 
 function calculate(){
 
@@ -237,9 +239,7 @@ function eraseValue(){
     activatePlusMinus();
     activateButtons();
 
-    let screen = document.getElementById('screen');
-
-    screen.value = "0"; 
+    setScreen('0'); 
     IsDeletedScreen = false;
     firstNumber = '';
     secondNumber = '';
