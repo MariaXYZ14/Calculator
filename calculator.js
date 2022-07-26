@@ -178,7 +178,7 @@ function calculate(){
 
     disablePlusMinus();
 
-    let screen = getScreen();
+    let screen = document.getElementById('screen');
 
     if(IsDeletedScreen){
 
@@ -290,7 +290,7 @@ function activatePlusMinus(){
     getPlusMinus().style.backgroundColor = "rgb(255, 255, 255)";
     getPlusMinus().style.color = "black";
     getPlusMinus().style.cursor = "pointer";
-    getPlusMinus().disabled = false;
+   getPlusMinus().disabled = false;
 
 }
 
