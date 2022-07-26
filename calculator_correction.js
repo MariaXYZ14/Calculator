@@ -1,9 +1,10 @@
-let first_number;
-let second_number;
+let firstNumber;
+let secondNumber;
 let operation = '';
-let deleteScreen = false;
+let IsDeletedScreen = false;
 let third_number = false;
 
+    
 window.onload = function(){ 
 
     pantalla = document.getElementById("screen"); 
@@ -24,10 +25,10 @@ function clickNumber(number){
     
     let screen = document.getElementById('screen');
 
-    if(deleteScreen){
+    if(IsDeletedScreen){
       
         screen.value=number;
-        deleteScreen=false;
+        IsDeletedScreen=false;
 
     }
     else if(screen.value == 0){
@@ -79,10 +80,10 @@ function clickComma(){
     disabledComma();
     disabledPlusMinus();
 
-    if(deleteScreen){
+    if(IsDeletedScreen){
 
         screen.value = '0,';
-        deleteScreen = false;
+        IsDeletedScreen = false;
 
     }    
     else if(screen.value.includes(',')){
@@ -112,7 +113,7 @@ function changePlusMinus(){
     
     let screen = document.getElementById('screen');
 
-    if(screen.value == '' ||screen.value == 0 || screen.value == '0,' || deleteScreen){
+    if(screen.value == '' ||screen.value == 0 || screen.value == '0,' || IsDeletedScreen){
  
         return;
 
@@ -145,8 +146,8 @@ function clickOperation(operator){
         let screen = document.getElementById('screen');
 
         operation = operator;
-        first_number = screen.value;
-        deleteScreen = true;
+        firstNumber = screen.value;
+        IsDeletedScreen = true;
 
     }
     else{
@@ -155,9 +156,9 @@ function clickOperation(operator){
 
         let screen = document.getElementById('screen');
 
-        first_number = screen.value;
+        firstNumber = screen.value;
         operation = operator;
-        deleteScreen = true;
+        IsDeletedScreen = true;
  
     }
      
@@ -173,7 +174,7 @@ function calculate(){
 
     let screen = document.getElementById('screen');
 
-    if(deleteScreen){
+    if(IsDeletedScreen){
 
         screen.value = 'ERROR';
         disabledButtons();
@@ -194,9 +195,9 @@ function calculate(){
         let num1;
         let num2 = '';
 
-        second_number = screen.value;
-        num1 = convertToNumber(first_number);
-        num2 = convertToNumber(second_number);
+        secondNumber = screen.value;
+        num1 = convertToNumber(firstNumber);
+        num2 = convertToNumber(secondNumber);
 
         if(operation == '+'){
         
@@ -234,9 +235,9 @@ function eraseValue(){
     let screen = document.getElementById('screen');
 
     screen.value = "0"; 
-    deleteScreen = false;
-    first_number = '';
-    second_number = '';
+    IsDeletedScreen = false;
+    firstNumber = '';
+    secondNumber = '';
     operation = '';   
 
 }

@@ -1,7 +1,8 @@
-let first_number;
-let second_number;
-let operation='';
-let deleteScreen = false;
+let firstNumber;
+let secondNumber;
+let operation = '';
+let IsDeletedScreen = false;
+let ThereAreTwoOperatorsFollowed = false;
 let third_number = false;
 
 window.onload = function(){ 
@@ -11,97 +12,122 @@ window.onload = function(){
 
 }
 
+function getScreen(){
+
+    return document.getElementById('screen').value;
+}
+
+function setScreen(newValue) {
+    
+    document.getElementById('screen').value = newValue;
+    
+}
+
+function addScreen(newValue) {
+    
+    document.getElementById('screen').value += newValue;
+    
+}
+
 function clickNumber(number){
    
-    activedPlusMinus();
+    activatePlusMinus();
     
-    let screen = document.getElementById('screen');
-
-    if(deleteScreen){
+    if(IsDeletedScreen){
       
-        screen.value=number;
-        deleteScreen=false;
+        setScreen(number);
+        IsDeletedScreen = false;
 
     }
-    else if(screen.value == 0){
+    else if(getScreen() == 0){
         
-        screen.value = number;
+        setScreen(number);
 
     }
-    else if(calculateLength(screen.value) >= 10){
+    else if(calculateNumberOfDigits(getScreen()) >= 10){
 
         return;
 
     }
-    else if(screen.value != null && third_number){
+    else if(getScreen() != null && third_number){
 
-        screen.value = number;
+        setScreen(number);
         third_number = false;
 
     }
     else{
 
-        screen.value += number;
-        if(calculateLength(screen.value) >= 10){ disabledNumbers();}
+        addScreen(number);
+
+        if(calculateNumberOfDigits(getScreen()) >= 10){ 
+            
+            disableNumbers();
+
+        }
 
     }
     
 }
 
-function calculateLength(len){
+function calculateNumberOfDigits(digits){
 
     let result = 0;
 
-    for(let i = 0;i<len.length;i++){
+    for(let i = 0;i < digits.length;i++){
 
-        if(len[i] != ',' && len[i] != '-'){result++;}
+        if(digits[i] != ',' && digits[i] != '-'){
+       
+            result++;
+    
+        }
 
     }
-        return result;
+
+    return result;
 
 }
 
 function clickComma(){
-    
-    let screen = document.getElementById('screen');
 
-    disabledComma();
-    disabledPlusMinus();
+    disableComma();
+    disablePlusMinus();
 
-    if(deleteScreen){
+    if(IsDeletedScreen){
 
-        screen.value = '0,';
-        deleteScreen = false;
+        setScreen('0,');
+        IsDeletedScreen = false;
 
     }    
-    else if(screen.value.includes(',')){
+    else if(getScreen().includes(',')){
             
         return;
 
     }
-    else if(calculateLength(screen.value) >= 10) {
+    else if(calculateNumberOfDigits(getScreen()) >= 10) {
         
-        disabledNumbers();
+        disableNumbers();
         return;
 
     }
-    else if(screen.value == ''){
+    else if(getScreen() == '0'){
         
-        screen.value = "0,";
+        setScreen('0,');
 
     }
     else{
 
-        screen.value += ",";
+        addScreen(',');
 
     }
 }
 
-function changePlusMinus(){
+//por revisar
+
+function clickPlusMinus(){
     
     let screen = document.getElementById('screen');
 
-    if(screen.value == '' ||screen.value == 0 || screen.value == '0,' || deleteScreen){
+    if(screen.value == '' ||screen.value == 0 || screen.value == '0,' || IsDeletedScreen){
  
         return;
 
@@ -121,49 +147,53 @@ function changePlusMinus(){
 
 }
 
-function clickOperation(operator){
+
+function clickOperation(NewOperation){
     
-    activedNumbers();
-    activedComma();
-    disabledPlusMinus();
+    activateNumbers();
+    activateComma();
+    disablePlusMinus();
 
     if(operation == '' || operation == '+' || operation == '-' || operation == 'x' || operation == '/'){
       
-        let screen = document.getElementById('screen');
+        operation = NewOperation;
+        firstNumber = getScreen();
+        IsDeletedScreen = true;
+        ThereAreTwoOperatorsFollowed = true;
 
-        operation = operator;
-        first_number = screen.value;
-        deleteScreen = true;
+    }
+    else if( ThereAreTwoOperatorsFollowed = true && (operation == '+' || operation == '-' || operation == 'x' || operation == '/')){
+
+        calculate();
+        firstNumber = getScreen();
+        operation = NewOperation;
+        IsDeletedScreen = true;
+        ThereAreTwoOperatorsFollowed = false;
 
     }
     else{
        
         calculate();
-
-        let screen = document.getElementById('screen');
-
-        first_number = screen.value;
-        operation = operator;
-        deleteScreen = true;
+        firstNumber = getScreen();
+        operation = NewOperation;
+        IsDeletedScreen = true;
  
     }
-     
-
-    
+        
 }
 
 function calculate(){
 
     third_number = true;
 
-    disabledPlusMinus();
+    disablePlusMinus();
 
     let screen = document.getElementById('screen');
 
-    if(deleteScreen){
+    if(IsDeletedScreen){
 
         screen.value = 'ERROR';
-        disabledButtons();
+        disableButtons();
 
     }
     else if(operation == ''){
@@ -181,9 +211,9 @@ function calculate(){
         let num1;
         let num2 = '';
 
-        second_number = screen.value;
-        num1 = convertToNumber(first_number);
-        num2 = convertToNumber(second_number);
+        secondNumber = screen.value;
+        num1 = convertToNumber(firstNumber);
+        num2 = convertToNumber(secondNumber);
 
         if(operation == '+'){
         
@@ -214,23 +244,23 @@ function calculate(){
 
 function eraseValue(){
 
-    activedComma();
-    activedPlusMinus();
-    activedButtons();
+    activateComma();
+    activatePlusMinus();
+    activateButtons();
 
     let screen = document.getElementById('screen');
 
     screen.value = "0"; 
-    deleteScreen = false;
-    first_number = '';
-    second_number = '';
+    IsDeletedScreen = false;
+    firstNumber = '';
+    secondNumber = '';
     operation = '';   
 
 }
 
 //disabling
 
-function disabledComma(){
+function disableComma(){
 
     document.getElementById("comma").style.backgroundColor = "#FF0000";
     document.getElementById("comma").style.cursor = "not-allowed";
@@ -239,7 +269,7 @@ function disabledComma(){
 
 }
 
-function activedComma(){
+function activateComma(){
 
     document.getElementById("comma").style.backgroundColor = "#12a6d3";
     document.getElementById("comma").style.cursor = "pointer";
@@ -248,7 +278,7 @@ function activedComma(){
 
 }
 
-function disabledPlusMinus(){
+function disablePlusMinus(){
 
     document.getElementById("plus-minus").style.backgroundColor = "#FF0000";
     document.getElementById("plus-minus").style.color = "black";
@@ -257,7 +287,7 @@ function disabledPlusMinus(){
  
 }
 
-function activedPlusMinus(){
+function activatePlusMinus(){
 
     document.getElementById("plus-minus").style.backgroundColor = "rgb(255, 255, 255)";
     document.getElementById("plus-minus").style.color = "black";
@@ -266,14 +296,14 @@ function activedPlusMinus(){
 
 }
 
-function disabledButtons(){
+function disableButtons(){
 
-    disabledNumbers();
-    disabledOperators();
+    disableNumbers();
+    disableOperators();
 
 }
 
-function disabledNumbers(){
+function disableNumbers(){
     
     var elementsNumbers = document.querySelectorAll(".numbers");
     var index = 0, length = elementsNumbers.length;
@@ -286,12 +316,12 @@ function disabledNumbers(){
 
     }
 
-    disabledComma();
-    disabledPlusMinus();
+    disableComma();
+    disablePlusMinus();
 
 }
 
-function disabledOperators(){
+function disableOperators(){
    
     var elementsOperations = document.querySelectorAll(".operation");
     var index2 = 0, length = elementsOperations.length;
@@ -319,9 +349,9 @@ function disabledOperators(){
 
 }
 
-function activedButtons(){
+function activateButtons(){
   
-    activedNumbers();
+    activateNumbers();
 
     var elementsOperations = document.querySelectorAll(".operationRed");
     var index2 = 0, length = elementsOperations.length;
@@ -334,12 +364,12 @@ function activedButtons(){
 
     }
 
-    activedComma();
-    activedPlusMinus();
+    activateComma();
+    activatePlusMinus();
 
 }
 
-function activedNumbers(){
+function activateNumbers(){
 
     var elementsNumbers = document.querySelectorAll(".numbers");
     var index = 0, length = elementsNumbers.length;
@@ -364,7 +394,7 @@ function convertToString(num){
    
     if(num == 'Infinity' || num == '-Infinity' || !(num == num)){
 
-        disabledButtons();
+        disableButtons();
 
         return "ERROR";
 
@@ -372,7 +402,7 @@ function convertToString(num){
 
     if(Math.abs(num) >= 9999999999.5){
 
-        disabledButtons();
+        disableButtons();
 
         return "ERROR";
 
@@ -476,6 +506,6 @@ function keyboard (TheEvent) {
     if (k == 111){clickOperation('/'); changeHighlighted(document.getElementById('division').classList)} 
     if (k == 32 || k == 13 || k == 187) {calculate();removeHighlighted();} //equal or space
     if (k == 27){eraseValue();removeHighlighted();} //C
-    if (k == 17){changePlusMinus()}
+    if (k == 17){clickPlusMinus()}
     
     }
