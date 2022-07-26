@@ -121,7 +121,6 @@ function clickComma(){
 }
 
 
-
 function clickPlusMinus(){
     
     let screen = getScreen();
@@ -179,7 +178,7 @@ function calculate(){
 
     disablePlusMinus();
 
-    let screen = document.getElementById('screen');
+    let screen = getScreen();
 
     if(IsDeletedScreen){
 
@@ -249,39 +248,49 @@ function eraseValue(){
 
 //disabling
 
+function getComma(){
+
+    return document.getElementById("comma");
+
+}
+function getPlusMinus(){
+
+    return document.getElementById("plus-minus");
+
+}
 function disableComma(){
 
-    document.getElementById("comma").style.backgroundColor = "#FF0000";
-    document.getElementById("comma").style.cursor = "not-allowed";
-    document.getElementById("comma").style.color = "black";
-    document.getElementById("comma").disabled = true;
+    getComma().style.backgroundColor = "#FF0000";
+    getComma().style.cursor = "not-allowed";
+    getComma().style.color = "black";
+    getComma().disabled = true;
 
 }
 
 function activateComma(){
 
-    document.getElementById("comma").style.backgroundColor = "#12a6d3";
-    document.getElementById("comma").style.cursor = "pointer";
-    document.getElementById("comma").style.color = "black";
-    document.getElementById("comma").disabled = false;
+    getComma().style.backgroundColor = "#12a6d3";
+    getComma().style.cursor = "pointer";
+    getComma().style.color = "black";
+    getComma().disabled = false;
 
 }
 
 function disablePlusMinus(){
 
-    document.getElementById("plus-minus").style.backgroundColor = "#FF0000";
-    document.getElementById("plus-minus").style.color = "black";
-    document.getElementById("plus-minus").style.cursor = "not-allowed";
-    document.getElementById("plus-minus").disabled = true;
+    getPlusMinus().style.backgroundColor = "#FF0000";
+    getPlusMinus().style.color = "black";
+    getPlusMinus().style.cursor = "not-allowed";
+    getPlusMinus().disabled = true;
  
 }
 
 function activatePlusMinus(){
 
-    document.getElementById("plus-minus").style.backgroundColor = "rgb(255, 255, 255)";
-    document.getElementById("plus-minus").style.color = "black";
-    document.getElementById("plus-minus").style.cursor = "pointer";
-    document.getElementById("plus-minus").disabled = false;
+    getPlusMinus().style.backgroundColor = "rgb(255, 255, 255)";
+    getPlusMinus().style.color = "black";
+    getPlusMinus().style.cursor = "pointer";
+    getPlusMinus().disabled = false;
 
 }
 
