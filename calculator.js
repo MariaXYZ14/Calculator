@@ -2,7 +2,6 @@ let firstNumber;
 let secondNumber;
 let operation = '';
 let IsDeletedScreen = false;
-let ThereAreTwoOperatorsFollowed = false;
 let third_number = false;
 
 window.onload = function(){ 
@@ -154,25 +153,15 @@ function clickOperation(NewOperation){
     activateComma();
     disablePlusMinus();
 
-    if(operation == '' || operation == '+' || operation == '-' || operation == 'x' || operation == '/'){
+    if(operation == '' || IsDeletedScreen){
       
         operation = NewOperation;
         firstNumber = getScreen();
         IsDeletedScreen = true;
-        ThereAreTwoOperatorsFollowed = true;
 
     }
-    else if( ThereAreTwoOperatorsFollowed = true && (operation == '+' || operation == '-' || operation == 'x' || operation == '/')){
+    else if(!IsDeletedScreen){
 
-        calculate();
-        firstNumber = getScreen();
-        operation = NewOperation;
-        IsDeletedScreen = true;
-        ThereAreTwoOperatorsFollowed = false;
-
-    }
-    else{
-       
         calculate();
         firstNumber = getScreen();
         operation = NewOperation;
