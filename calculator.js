@@ -170,7 +170,6 @@ function clickOperation(NewOperation){
         
 }
 
-//por revisar
 
 function calculate(){
 
@@ -178,19 +177,19 @@ function calculate(){
 
     disablePlusMinus();
 
-    let screen = document.getElementById('screen');
+    let screen = getScreen();
 
     if(IsDeletedScreen){
-
-        screen.value = 'ERROR';
+        
+        setScreen('ERROR');
         disableButtons();
 
     }
     else if(operation == ''){
       
-        if(screen.value[screen.value.length-1] == ','){
+        if(screen[screen.length-1] == ','){
         
-            screen.value=screen.value.substring(0,screen.value.length-1);
+           setScreen(screen.substring(0,screen.length-1));
     
         }
 
@@ -198,41 +197,41 @@ function calculate(){
     else{
         
         let result;
-        let num1;
-        let num2 = '';
+        let firstNumberConverted;
+        let secondNumberConverted = '';
 
-        secondNumber = screen.value;
-        num1 = convertToNumber(firstNumber);
-        num2 = convertToNumber(secondNumber);
+        secondNumber = screen;
+        firstNumberConverted = convertToNumber(firstNumber);
+        secondNumberConverted = convertToNumber(secondNumber);
 
         if(operation == '+'){
         
-            result = num1+num2;
+            result = firstNumberConverted+secondNumberConverted;
 
         }
         else if(operation == '-'){
         
-            result = num1-num2;
+            result = firstNumberConverted-secondNumberConverted;
 
         }
         else if(operation == 'x'){
         
-            result = num1*num2;
+            result = firstNumberConverted*secondNumberConverted;
 
         }
         else if(operation == '/'){
             
-            result = num1/num2;
+            result = firstNumberConverted/secondNumberConverted;
 
         }
     
     operation = '';
-    screen.value = convertToString(result);
+    setScreen(convertToString(result));
 
     }
 }
 
-function eraseValue(){
+function clickErase(){
 
     activateComma();
     activatePlusMinus();
@@ -244,6 +243,29 @@ function eraseValue(){
     secondNumber = '';
     operation = '';   
 
+}
+
+
+function changeHighlighted(changeClass){
+
+    removeHighlighted();
+
+    changeClass.remove("operation");
+    changeClass.add("operation2");
+    
+}
+
+function removeHighlighted(){
+
+    let changeClass=document.getElementsByClassName("changedOperationButtonClass");
+    
+    for(let index=0;index<changeClass.length;index++){
+
+        changeClass[index].classList.remove("operation2");
+        changeClass[index].classList.add("operation");
+
+    }
+    
 }
 
 //disabling
@@ -290,7 +312,7 @@ function activatePlusMinus(){
     getPlusMinus().style.backgroundColor = "rgb(255, 255, 255)";
     getPlusMinus().style.color = "black";
     getPlusMinus().style.cursor = "pointer";
-   getPlusMinus().disabled = false;
+    getPlusMinus().disabled = false;
 
 }
 
@@ -307,6 +329,7 @@ function disableNumbers(){
     var index = 0, length = elementsNumbers.length;
 
     for ( ; index < length; index++) {
+
         elementsNumbers[index].style.backgroundColor = "#FF0000";
         elementsNumbers[index].style.cursor = "not-allowed";
         elementsNumbers[index].style.color = "black";
@@ -321,27 +344,14 @@ function disableNumbers(){
 
 function disableOperators(){
    
-    var elementsOperations = document.querySelectorAll(".operation");
-    var index2 = 0, length = elementsOperations.length;
+    var elementsOperations = document.getElementsByClassName("changedOperationButtonClass");
+    var index = 0, length = elementsOperations.length;
 
-  
-    for ( ; index2 < length; index2++) {
+    for ( ; index < length; index++) {
 
-        elementsOperations[index2].classList.remove("operation");
-        elementsOperations[index2].classList.add("operationRed");
-        elementsOperations[index2].disabled = true;
-
-    }
-
-
-    var elementsOperations2 = document.querySelectorAll(".operation2");
-    var index3 = 0, length = elementsOperations2.length;
-
-    for ( ; index3 < length; index3++) {
-
-        elementsOperations2[index3].classList.remove("operation2");
-        elementsOperations2[index3].classList.add("operationRed");
-        elementsOperations2[index3].disabled = true;
+        elementsOperations[index].classList.remove("operation");
+        elementsOperations[index].classList.add("operationRed");
+        elementsOperations[index].disabled = true;
 
     }
 
@@ -351,7 +361,7 @@ function activateButtons(){
   
     activateNumbers();
 
-    var elementsOperations = document.querySelectorAll(".operationRed");
+    var elementsOperations = document.getElementsByClassName(".operationRed");
     var index2 = 0, length = elementsOperations.length;
 
     for ( ; index2 < length; index2++) {
@@ -454,28 +464,6 @@ function contEnters(num){
 
 }
 
-function changeHighlighted(changeClass){
-
-    removeHighlighted();
-
-    changeClass.remove("operation");
-    changeClass.add("operation2");
-    
-}
-
-function removeHighlighted(){
-
-    let changeClass=document.getElementsByClassName("changedOperationButtonClass");
-    
-    for(let index=0;index<changeClass.length;index++){
-
-        changeClass[index].classList.remove("operation2");
-        changeClass[index].classList.add("operation");
-
-    }
-    
-}
-
 function keyboard (TheEvent) { 
 
     events = TheEvent || window.event;
@@ -503,7 +491,7 @@ function keyboard (TheEvent) {
     if (k == 109){clickOperation('-'); changeHighlighted(document.getElementById('minus').classList)} 
     if (k == 111){clickOperation('/'); changeHighlighted(document.getElementById('division').classList)} 
     if (k == 32 || k == 13 || k == 187) {calculate();removeHighlighted();} //equal or space
-    if (k == 27){eraseValue();removeHighlighted();} //C
+    if (k == 27){clickErase();removeHighlighted();} //C
     if (k == 17){clickPlusMinus()}
     
     }
