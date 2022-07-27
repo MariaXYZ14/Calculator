@@ -1,6 +1,6 @@
 import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers} from './disabling_buttons_helper.js';
 import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
-
+import{getButtons,getScreen,setScreen,addScreen} from './getters-setters_helper.js';
 let firstNumber;
 let secondNumber;
 let operation = '';
@@ -10,17 +10,16 @@ let third_number = false;
 
 window.onload = function(){ 
 
-    document.getElementById("zero").onclick = function(){clickNumber(this.value)};
-    document.getElementById("one").onclick = function(){clickNumber(this.value)};
-    document.getElementById("two").onclick = function(){clickNumber(this.value)};
-    document.getElementById("three").onclick = function(){clickNumber(this.value)};
-    document.getElementById("four").onclick = function(){clickNumber(this.value)};
-    document.getElementById("five").onclick = function(){clickNumber(this.value)};
-    document.getElementById("six").onclick = function(){clickNumber(this.value)};
-    document.getElementById("six").onclick = function(){clickNumber(this.value)};
-    document.getElementById("seven").onclick = function(){clickNumber(this.value)};
-    document.getElementById("eight").onclick = function(){clickNumber(this.value)};
-    document.getElementById("nine").onclick = function(){clickNumber(this.value)};
+    getButtons('zero').onclick = function(){clickNumber(this.value)};
+    getButtons('one').onclick = function(){clickNumber(this.value)};
+    getButtons('two').onclick = function(){clickNumber(this.value)};
+    getButtons('three').onclick = function(){clickNumber(this.value)};
+    getButtons('four').onclick = function(){clickNumber(this.value)};
+    getButtons('five').onclick = function(){clickNumber(this.value)};
+    getButtons('six').onclick = function(){clickNumber(this.value)};
+    getButtons('seven').onclick = function(){clickNumber(this.value)};
+    getButtons('eight').onclick = function(){clickNumber(this.value)};
+    getButtons('nine').onclick = function(){clickNumber(this.value)};
 
     document.getElementById("comma").onclick = function(){clickComma()};
 
@@ -35,23 +34,6 @@ window.onload = function(){
 
     document.onkeydown = keyboard; 
 
-}
-
-function getScreen(){
-
-    return document.getElementById('screen').value;
-}
-
-function setScreen(newValue) {
-    
-    document.getElementById('screen').value = newValue;
-    
-}
-
-function addScreen(newValue) {
-    
-    document.getElementById('screen').value += newValue;
-    
 }
 
 function clickNumber(number){
