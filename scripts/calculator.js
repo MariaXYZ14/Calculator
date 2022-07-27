@@ -1,4 +1,5 @@
 import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers} from './disabling_buttons_helper.js';
+import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
 
 let firstNumber;
 let secondNumber;
@@ -6,7 +7,6 @@ let operation = '';
 let maximumDigits = 10;
 let IsDeletedScreen = false;
 let third_number = false;
-let pantalla;
 
 window.onload = function(){ 
 
@@ -33,7 +33,6 @@ window.onload = function(){
     document.getElementById("C").onclick = function(){clickErase();removeHighlighted();};
     document.getElementById("plus-minus").onclick = function(){clickPlusMinus()};
 
-    pantalla = document.getElementById("screen"); 
     document.onkeydown = keyboard; 
 
 }
@@ -93,24 +92,6 @@ function clickNumber(number){
 
     }
     
-}
-
-function calculateNumberOfDigits(digits){
-
-    let result = 0;
-
-    for(let i = 0;i < digits.length;i++){
-
-        if(digits[i] != ',' && digits[i] != '-'){
-       
-            result++;
-    
-        }
-
-    }
-
-    return result;
-
 }
 
 function clickComma(){
@@ -289,80 +270,6 @@ function removeHighlighted(){
 
     }
     
-}
-
-//disabling
-
-function convertToNumber(text){
-
-    return parseFloat(text.replace(',','.'));
-
-}
-
-function convertToString(number){
-   
-    if(number == 'Infinity' || number == '-Infinity' || !(number == number)){
-
-        disableButtons();
-
-        return "ERROR";
-
-    }
-
-    if(Math.abs(number) >= 9999999999.5){
-
-        disableButtons();
-
-        return "ERROR";
-
-    }else if(contZero(number) == 0){
-        
-        return number.toFixed(10-contEnters(number)).toString().replace('.',',');
-
-    } 
-    else{
-
-        return number.toFixed(10-contZero(number)).toString().replace('.',',');
-
-    }
-
-}
-
-function contZero(number){
-
-    let zeros = 0;
-    let cadena = number.toFixed(10).toString();
-   
-    if(!cadena.includes('.')){
-        return 0;
-    }
-
-    let point = cadena.length-1;
-
-    while(cadena[point] == '0'){
-
-        zeros++;
-        point--;
-
-    }
-
-    return zeros;
-
-}
-
-function contEnters(number){
-
-    let cadena = number.toFixed(10);
-    let enters = cadena.indexOf('.');
-
-    if(cadena[0] == '-'){
-
-        enters--;
-
-    }
-
-    return enters;
-
 }
 
 function keyboard (TheEvent) { 
