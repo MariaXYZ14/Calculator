@@ -1,71 +1,120 @@
-export function getButtons(className){
+export function getButtons(buttonName){
 
-    let number;
+    let button;
 
-    switch(className){
+    switch(buttonName){
 
         case 'zero':
 
-        number= document.getElementById("zero");
+            button= document.getElementById("zero");
 
         break;
 
         case 'one':
         
-        number= document.getElementById("one");
+            button= document.getElementById("one");
 
         break;
 
         case 'two':
 
-        number= document.getElementById("two");
+            button= document.getElementById("two");
 
         break;
 
         case 'three':
         
-        number= document.getElementById("three");
+            button= document.getElementById("three");
 
         break;
 
         case 'four':
 
-        number= document.getElementById("four");
+            button= document.getElementById("four");
 
         break;
 
         case 'five':
         
-        number= document.getElementById("five");
+            button= document.getElementById("five");
 
         break;
 
         case 'six':
 
-         number= document.getElementById("six");
+            button= document.getElementById("six");
     
         break;
     
         case 'seven':
             
-        number= document.getElementById("seven");
+            button= document.getElementById("seven");
     
         break;
     
         case 'eight':
     
-        number= document.getElementById("eight");
+            button= document.getElementById("eight");
     
         break;
     
         case 'nine':
             
-        number= document.getElementById("nine");
+            button= document.getElementById("nine");
     
         break;
+
+        case 'plus':
+                
+            button= document.getElementById("plus");
+        
+        break;
+        
+        case 'minus':
+        
+            button= document.getElementById("minus");
+        
+        break;
+        
+        case 'multiply':
+                
+            button= document.getElementById("multiply");
+        
+        break;
+
+        case 'division':
+                
+            button= document.getElementById("division");
+        
+        break;
+            
+        case 'equal':
+                
+            button= document.getElementById("equal");
+        
+        break;
+
+        case 'C':
+                
+            button= document.getElementById("C");
+        
+        break;
+
+        case 'plus-minus':
+                
+            button= document.getElementById("plus-minus");
+            
+        break;
+
+        case 'comma':
+                
+            button= document.getElementById("comma");
+            
+        break;
+
     }
 
-   return number;
+   return button;
 
 }
 export function getScreen(){

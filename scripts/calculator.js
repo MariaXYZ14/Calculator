@@ -21,16 +21,16 @@ window.onload = function(){
     getButtons('eight').onclick = function(){clickNumber(this.value)};
     getButtons('nine').onclick = function(){clickNumber(this.value)};
 
-    document.getElementById("comma").onclick = function(){clickComma()};
+    getButtons('comma').onclick = function(){clickComma()};
 
-    document.getElementById("division").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList)};
-    document.getElementById("multiply").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList)};
-    document.getElementById("minus").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList)};
-    document.getElementById("plus").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('plus').classList)};
-    document.getElementById("equal").onclick = function(){calculate();removeHighlighted();};
+    getButtons('division').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList)};
+    getButtons('multiply').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList)};
+    getButtons('minus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList)};
+    getButtons('plus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('plus').classList)};
+    getButtons('equal').onclick = function(){calculate();removeHighlighted();};
 
-    document.getElementById("C").onclick = function(){clickErase();removeHighlighted();};
-    document.getElementById("plus-minus").onclick = function(){clickPlusMinus()};
+    getButtons('C').onclick = function(){clickErase();removeHighlighted();};
+    getButtons('plus-minus').onclick = function(){clickPlusMinus()};
 
     document.onkeydown = keyboard; 
 
