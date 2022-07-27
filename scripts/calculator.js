@@ -1,10 +1,37 @@
+import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers} from './disabling_buttons_helper.js';
+
 let firstNumber;
 let secondNumber;
 let operation = '';
+let maximumDigits = 10;
 let IsDeletedScreen = false;
 let third_number = false;
+let pantalla;
 
 window.onload = function(){ 
+
+    document.getElementById("zero").onclick = function(){clickNumber(this.value)};
+    document.getElementById("one").onclick = function(){clickNumber(this.value)};
+    document.getElementById("two").onclick = function(){clickNumber(this.value)};
+    document.getElementById("three").onclick = function(){clickNumber(this.value)};
+    document.getElementById("four").onclick = function(){clickNumber(this.value)};
+    document.getElementById("five").onclick = function(){clickNumber(this.value)};
+    document.getElementById("six").onclick = function(){clickNumber(this.value)};
+    document.getElementById("six").onclick = function(){clickNumber(this.value)};
+    document.getElementById("seven").onclick = function(){clickNumber(this.value)};
+    document.getElementById("eight").onclick = function(){clickNumber(this.value)};
+    document.getElementById("nine").onclick = function(){clickNumber(this.value)};
+
+    document.getElementById("comma").onclick = function(){clickComma()};
+
+    document.getElementById("division").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList)};
+    document.getElementById("multiply").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList)};
+    document.getElementById("minus").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList)};
+    document.getElementById("plus").onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('plus').classList)};
+    document.getElementById("equal").onclick = function(){calculate();removeHighlighted();};
+
+    document.getElementById("C").onclick = function(){clickErase();removeHighlighted();};
+    document.getElementById("plus-minus").onclick = function(){clickPlusMinus()};
 
     pantalla = document.getElementById("screen"); 
     document.onkeydown = keyboard; 
@@ -43,7 +70,7 @@ function clickNumber(number){
         setScreen(number);
 
     }
-    else if(calculateNumberOfDigits(getScreen()) >= 10){
+    else if(calculateNumberOfDigits(getScreen()) >= maximumDigits){
 
         return;
 
@@ -58,7 +85,7 @@ function clickNumber(number){
 
         addScreen(number);
 
-        if(calculateNumberOfDigits(getScreen()) >= 10){ 
+        if(calculateNumberOfDigits(getScreen()) >= maximumDigits){ 
             
             disableNumbers();
 
@@ -102,7 +129,7 @@ function clickComma(){
         return;
 
     }
-    else if(calculateNumberOfDigits(getScreen()) >= 10) {
+    else if(calculateNumberOfDigits(getScreen()) >= maximumDigits) {
         
         disableNumbers();
         return;
@@ -119,7 +146,6 @@ function clickComma(){
 
     }
 }
-
 
 function clickPlusMinus(){
     
@@ -145,7 +171,6 @@ function clickPlusMinus(){
 
 }
 
-
 function clickOperation(NewOperation){
     
     activateNumbers();
@@ -169,7 +194,6 @@ function clickOperation(NewOperation){
     }
         
 }
-
 
 function calculate(){
 
@@ -245,7 +269,6 @@ function clickErase(){
 
 }
 
-
 function changeHighlighted(changeClass){
 
     removeHighlighted();
@@ -270,137 +293,15 @@ function removeHighlighted(){
 
 //disabling
 
-function getComma(){
-
-    return document.getElementById("comma");
-
-}
-function getPlusMinus(){
-
-    return document.getElementById("plus-minus");
-
-}
-function disableComma(){
-
-    getComma().style.backgroundColor = "#FF0000";
-    getComma().style.cursor = "not-allowed";
-    getComma().style.color = "black";
-    getComma().disabled = true;
-
-}
-
-function activateComma(){
-
-    getComma().style.backgroundColor = "#12a6d3";
-    getComma().style.cursor = "pointer";
-    getComma().style.color = "black";
-    getComma().disabled = false;
-
-}
-
-function disablePlusMinus(){
-
-    getPlusMinus().style.backgroundColor = "#FF0000";
-    getPlusMinus().style.color = "black";
-    getPlusMinus().style.cursor = "not-allowed";
-    getPlusMinus().disabled = true;
- 
-}
-
-function activatePlusMinus(){
-
-    getPlusMinus().style.backgroundColor = "rgb(255, 255, 255)";
-    getPlusMinus().style.color = "black";
-    getPlusMinus().style.cursor = "pointer";
-    getPlusMinus().disabled = false;
-
-}
-
-function disableButtons(){
-
-    disableNumbers();
-    disableOperators();
-
-}
-
-function disableNumbers(){
-    
-    var elementsNumbers = document.querySelectorAll(".numbers");
-    var index = 0, length = elementsNumbers.length;
-
-    for ( ; index < length; index++) {
-
-        elementsNumbers[index].style.backgroundColor = "#FF0000";
-        elementsNumbers[index].style.cursor = "not-allowed";
-        elementsNumbers[index].style.color = "black";
-        elementsNumbers[index].disabled = true;
-
-    }
-
-    disableComma();
-    disablePlusMinus();
-
-}
-
-function disableOperators(){
-   
-    var elementsOperations = document.getElementsByClassName("changedOperationButtonClass");
-    var index = 0, length = elementsOperations.length;
-
-    for ( ; index < length; index++) {
-
-        elementsOperations[index].classList.remove("operation");
-        elementsOperations[index].classList.add("operationRed");
-        elementsOperations[index].disabled = true;
-
-    }
-
-}
-
-function activateButtons(){
-  
-    activateNumbers();
-
-    var elementsOperations = document.getElementsByClassName(".operationRed");
-    var index2 = 0, length = elementsOperations.length;
-
-    for ( ; index2 < length; index2++) {
-
-        elementsOperations[index2].classList.remove("operationRed");
-        elementsOperations[index2].classList.add("operation");
-        elementsOperations[index2].disabled = false;
-
-    }
-
-    activateComma();
-    activatePlusMinus();
-
-}
-
-function activateNumbers(){
-
-    var elementsNumbers = document.querySelectorAll(".numbers");
-    var index = 0, length = elementsNumbers.length;
-
-    for ( ; index < length; index++) {
-        elementsNumbers[index].style.backgroundColor = "rgb(29, 191, 240)";
-        elementsNumbers[index].style.cursor = "pointer";
-        elementsNumbers[index].style.color = "black";
-        elementsNumbers[index].disabled = false;
-
-    }
-
-}
-
 function convertToNumber(text){
 
     return parseFloat(text.replace(',','.'));
 
 }
 
-function convertToString(num){
+function convertToString(number){
    
-    if(num == 'Infinity' || num == '-Infinity' || !(num == num)){
+    if(number == 'Infinity' || number == '-Infinity' || !(number == number)){
 
         disableButtons();
 
@@ -408,29 +309,29 @@ function convertToString(num){
 
     }
 
-    if(Math.abs(num) >= 9999999999.5){
+    if(Math.abs(number) >= 9999999999.5){
 
         disableButtons();
 
         return "ERROR";
 
-    }else if(contZero(num) == 0){
+    }else if(contZero(number) == 0){
         
-        return num.toFixed(10-contEnters(num)).toString().replace('.',',');
+        return number.toFixed(10-contEnters(number)).toString().replace('.',',');
 
     } 
     else{
 
-        return num.toFixed(10-contZero(num)).toString().replace('.',',');
+        return number.toFixed(10-contZero(number)).toString().replace('.',',');
 
     }
 
 }
 
-function contZero(num){
+function contZero(number){
 
     let zeros = 0;
-    let cadena = num.toFixed(10).toString();
+    let cadena = number.toFixed(10).toString();
    
     if(!cadena.includes('.')){
         return 0;
@@ -449,9 +350,9 @@ function contZero(num){
 
 }
 
-function contEnters(num){
+function contEnters(number){
 
-    let cadena = num.toFixed(10);
+    let cadena = number.toFixed(10);
     let enters = cadena.indexOf('.');
 
     if(cadena[0] == '-'){
@@ -466,8 +367,9 @@ function contEnters(num){
 
 function keyboard (TheEvent) { 
 
-    events = TheEvent || window.event;
-    k=events.keyCode; 
+    let events = TheEvent || window.event;
+    let k=events.keyCode; 
+    let p;
    
     if (k > 47 && k < 58) { 
 
@@ -487,10 +389,10 @@ function keyboard (TheEvent) {
 
     if (k == 110 || k == 188){clickComma()} 
     if (k == 106 || k == 88){clickOperation('x'); changeHighlighted(document.getElementById('multiply').classList)} 
-    if (k == 107 ){clickOperation('+'); changeHighlighted(document.getElementById('plus').classList)} 
-    if (k == 109){clickOperation('-'); changeHighlighted(document.getElementById('minus').classList)} 
+    if (k == 107 || k == 187){clickOperation('+'); changeHighlighted(document.getElementById('plus').classList)} 
+    if (k == 109 || k == 189){clickOperation('-'); changeHighlighted(document.getElementById('minus').classList)} 
     if (k == 111){clickOperation('/'); changeHighlighted(document.getElementById('division').classList)} 
-    if (k == 32 || k == 13 || k == 187) {calculate();removeHighlighted();} //equal or space
+    if (k == 32 || k == 13) {calculate();removeHighlighted();} //equal or space
     if (k == 27){clickErase();removeHighlighted();} //C
     if (k == 17){clickPlusMinus()}
     
