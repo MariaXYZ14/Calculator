@@ -2,7 +2,7 @@ export function getButtons(buttonName){
 
     let button;
 
-    button= document.getElementById(buttonName);
+    button = document.getElementById(buttonName);
 
     return button;
 

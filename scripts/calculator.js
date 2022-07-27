@@ -1,6 +1,7 @@
 import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers} from './disabling_buttons_helper.js';
 import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
 import{getButtons,getScreen,setScreen,addScreen} from './getters-setters_helper.js';
+
 let firstNumber;
 let secondNumber;
 let operation = '';
@@ -126,7 +127,7 @@ function clickPlusMinus(){
 
         }else{
 
-            setScreen('-'+ screen);
+            setScreen('-' + screen);
 
         }
 
@@ -243,9 +244,9 @@ function changeHighlighted(changeClass){
 
 function removeHighlighted(){
 
-    let changeClass=document.getElementsByClassName("changedOperationButtonClass");
+    let changeClass = document.getElementsByClassName("changedOperationButtonClass");
     
-    for(let index=0;index<changeClass.length;index++){
+    for(let index = 0;index < changeClass.length;index++){
 
         changeClass[index].classList.remove("operation2");
         changeClass[index].classList.add("operation");

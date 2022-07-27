@@ -1,3 +1,4 @@
+import{disableButtons} from './disabling_buttons_helper.js';
 
 export function calculateNumberOfDigits(digits){
 
