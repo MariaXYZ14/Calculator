@@ -50,16 +50,16 @@ function clickNumber(number){
         setScreen(number);
 
     }
+    else if(getScreen() != null && isDisplayReset){
+        setScreen(number);
+        isDisplayReset = false;
+        
+
+    }
     else if(calculateNumberOfDigits(getScreen()) >= maximumDigits){
         disableNumbers();
         activatePlusMinus();
         return;
-
-    }
-    else if(getScreen() != null && isDisplayReset){
-
-        setScreen(number);
-        isDisplayReset = false;
 
     }
     else{
@@ -92,7 +92,6 @@ function clickComma(){
 
     }
     else if(calculateNumberOfDigits(getScreen()) >= maximumDigits) {
-        
         disableNumbers();
         activatePlusMinus();
         return;
