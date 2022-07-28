@@ -1,4 +1,4 @@
-import{getComma,getPlusMinus} from './getters-setters_helper.js';
+import{getButtons, getComma,getPlusMinus} from './getters-setters_helper.js';
 
 export function disableComma(){
 
@@ -6,6 +6,15 @@ export function disableComma(){
     getComma().style.cursor = "not-allowed";
     getComma().style.color = "black";
     getComma().disabled = true;
+
+}
+
+export function disableZero(){
+
+    getButtons("zero").style.backgroundColor = "#FF0000";
+    getButtons("zero").style.cursor = "not-allowed";
+    getButtons("zero").style.color = "black";
+    getButtons("zero").disabled = true;
 
 }
 

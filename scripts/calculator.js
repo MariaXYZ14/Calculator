@@ -1,4 +1,4 @@
-import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers} from './disabling_buttons_helper.js';
+import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers,disableZero} from './disabling_buttons_helper.js';
 import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
 import{getButtons,getScreen,setScreen,addScreen, getButtonsClass} from './getters-setters_helper.js';
 
@@ -30,12 +30,14 @@ window.onload = function(){
     getButtons('plus-minus').onclick = function(){clickPlusMinus()};
 
     document.onkeydown = keyboard; 
-
+    disableZero();
+    disablePlusMinus();
 }
 
 function clickNumber(number){
    
     activatePlusMinus();
+    activateButtons();
     
     if(isDeletedScreen){
       
@@ -273,7 +275,7 @@ function keyboard (TheEvent) {
 
     }
 
-    if (k == 110 || k == 188){clickComma()} 
+    if (k == 110 || k == 188){getButtons("comma").click} 
     if (k == 106 || k == 88){clickOperation('x'); changeHighlighted(document.getElementById('multiply').classList)} 
     if (k == 107 || k == 187){clickOperation('+'); changeHighlighted(document.getElementById('plus').classList)} 
     if (k == 109 || k == 189){clickOperation('-'); changeHighlighted(document.getElementById('minus').classList)} 
