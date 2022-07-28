@@ -90,7 +90,7 @@ body{
 
 .numbers:hover{
 
-    background-color: rgb(29, 191, 240);
+    opacity:80%;
     cursor: pointer;
     transform: scale(1.05);
 
@@ -111,7 +111,7 @@ body{
 
 #zero:hover{
 
-    background-color: rgb(29, 191, 240);
+    opacity:80%;
     cursor: pointer;
     transform: scale(1.05);
 
@@ -132,7 +132,7 @@ body{
 
 #comma:hover{
     
-    background-color: rgb(29, 191, 240);
+    opacity:80%;
     cursor: pointer;
     transform: scale(1.05);
 
