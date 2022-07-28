@@ -81,7 +81,7 @@ export function activateButtons(){
   
     activateNumbers();
 
-    var elementsOperations = document.getElementsByClassName(".operationRed");
+    var elementsOperations = document.getElementsByClassName("changedOperationButtonClass");
     var index2 = 0, length = elementsOperations.length;
 
     for ( ; index2 < length; index2++) {

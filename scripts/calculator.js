@@ -216,10 +216,10 @@ function calculate(){
 }
 
 function clickErase(){
-
+    
+    activateButtons();
     activateComma();
     activatePlusMinus();
-    activateButtons();
 
     setScreen('0'); 
     isDeletedScreen = false;
