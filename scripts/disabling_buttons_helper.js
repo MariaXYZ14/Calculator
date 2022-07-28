@@ -1,13 +1,5 @@
-export function getComma(){
+import{getComma,getPlusMinus} from './getters-setters_helper.js';
 
-    return document.getElementById("comma");
-
-}
-export function getPlusMinus(){
-
-    return document.getElementById("plus-minus");
-
-}
 export function disableComma(){
 
     getComma().style.backgroundColor = "#FF0000";

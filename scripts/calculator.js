@@ -1,26 +1,22 @@
 import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers} from './disabling_buttons_helper.js';
 import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
-import{getButtons,getScreen,setScreen,addScreen} from './getters-setters_helper.js';
+import{getButtons,getScreen,setScreen,addScreen, getButtonsClass} from './getters-setters_helper.js';
 
 let firstNumber;
 let secondNumber;
 let operation = '';
 let maximumDigits = 10;
-let IsDeletedScreen = false;
-let third_number = false;
+let isDeletedScreen = false;
+let isDisplayReset = false;
 
 window.onload = function(){ 
+    
+    var numbers = getButtonsClass("numbers");
+    var index = 0, length = numbers.length;
 
-    getButtons('zero').onclick = function(){clickNumber(this.value)};
-    getButtons('one').onclick = function(){clickNumber(this.value)};
-    getButtons('two').onclick = function(){clickNumber(this.value)};
-    getButtons('three').onclick = function(){clickNumber(this.value)};
-    getButtons('four').onclick = function(){clickNumber(this.value)};
-    getButtons('five').onclick = function(){clickNumber(this.value)};
-    getButtons('six').onclick = function(){clickNumber(this.value)};
-    getButtons('seven').onclick = function(){clickNumber(this.value)};
-    getButtons('eight').onclick = function(){clickNumber(this.value)};
-    getButtons('nine').onclick = function(){clickNumber(this.value)};
+    for ( ; index < length; index++) {
+        numbers[index].onclick = function(){clickNumber(this.value)};  
+    }
 
     getButtons('comma').onclick = function(){clickComma()};
 
@@ -41,10 +37,10 @@ function clickNumber(number){
    
     activatePlusMinus();
     
-    if(IsDeletedScreen){
+    if(isDeletedScreen){
       
         setScreen(number);
-        IsDeletedScreen = false;
+        isDeletedScreen = false;
 
     }
     else if(getScreen() == 0){
@@ -57,10 +53,10 @@ function clickNumber(number){
         return;
 
     }
-    else if(getScreen() != null && third_number){
+    else if(getScreen() != null && isDisplayReset){
 
         setScreen(number);
-        third_number = false;
+        isDisplayReset = false;
 
     }
     else{
@@ -82,10 +78,10 @@ function clickComma(){
     disableComma();
     disablePlusMinus();
 
-    if(IsDeletedScreen){
+    if(isDeletedScreen){
 
         setScreen('0,');
-        IsDeletedScreen = false;
+        isDeletedScreen = false;
 
     }    
     else if(getScreen().includes(',')){
@@ -115,7 +111,7 @@ function clickPlusMinus(){
     
     let screen = getScreen();
 
-    if(screen == '' || screen == 0 || screen == '0,' || IsDeletedScreen){
+    if(screen == '' || screen == 0 || screen == '0,' || isDeletedScreen){
  
         return;
 
@@ -141,19 +137,19 @@ function clickOperation(NewOperation){
     activateComma();
     disablePlusMinus();
 
-    if(operation == '' || IsDeletedScreen){
+    if(operation == '' || isDeletedScreen){
       
         operation = NewOperation;
         firstNumber = getScreen();
-        IsDeletedScreen = true;
+        isDeletedScreen = true;
 
     }
-    else if(!IsDeletedScreen){
+    else if(!isDeletedScreen){
 
         calculate();
         firstNumber = getScreen();
         operation = NewOperation;
-        IsDeletedScreen = true;
+        isDeletedScreen = true;
  
     }
         
@@ -161,13 +157,13 @@ function clickOperation(NewOperation){
 
 function calculate(){
 
-    third_number = true;
+    isDisplayReset = true;
 
     disablePlusMinus();
 
     let screen = getScreen();
 
-    if(IsDeletedScreen){
+    if(isDeletedScreen){
         
         setScreen('ERROR');
         disableButtons();
@@ -226,7 +222,7 @@ function clickErase(){
     activateButtons();
 
     setScreen('0'); 
-    IsDeletedScreen = false;
+    isDeletedScreen = false;
     firstNumber = '';
     secondNumber = '';
     operation = '';   
