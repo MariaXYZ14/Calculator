@@ -51,7 +51,8 @@ function clickNumber(number){
 
     }
     else if(calculateNumberOfDigits(getScreen()) >= maximumDigits){
-
+        disableNumbers();
+        activatePlusMinus();
         return;
 
     }
@@ -68,7 +69,7 @@ function clickNumber(number){
         if(calculateNumberOfDigits(getScreen()) >= maximumDigits){ 
             
             disableNumbers();
-
+            activatePlusMinus();
         }
 
     }
@@ -78,7 +79,6 @@ function clickNumber(number){
 function clickComma(){
 
     disableComma();
-    disablePlusMinus();
 
     if(isDeletedScreen){
 
@@ -94,6 +94,7 @@ function clickComma(){
     else if(calculateNumberOfDigits(getScreen()) >= maximumDigits) {
         
         disableNumbers();
+        activatePlusMinus();
         return;
 
     }
@@ -254,7 +255,7 @@ function removeHighlighted(){
 }
 
 function keyboard (TheEvent) { 
-
+    TheEvent.preventDefault();
     let events = TheEvent || window.event;
     let k=events.keyCode; 
     let p;
@@ -281,6 +282,6 @@ function keyboard (TheEvent) {
     if (k == 111){clickOperation('/'); changeHighlighted(document.getElementById('division').classList)} 
     if (k == 32 || k == 13) {calculate();removeHighlighted();} //equal or space
     if (k == 27){clickErase();removeHighlighted();} //C
-    if (k == 17){clickPlusMinus()}
+    if (k == 17){getButtons("plus-minus").click();}
     
     }
