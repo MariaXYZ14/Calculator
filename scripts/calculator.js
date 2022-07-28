@@ -32,6 +32,7 @@ window.onload = function(){
     document.onkeydown = keyboard; 
     disableZero();
     disablePlusMinus();
+
 }
 
 function clickNumber(number){
@@ -51,12 +52,13 @@ function clickNumber(number){
 
     }
     else if(getScreen() != null && isDisplayReset){
+      
         setScreen(number);
         isDisplayReset = false;
         
-
     }
     else if(calculateNumberOfDigits(getScreen()) >= maximumDigits){
+        
         disableNumbers();
         activatePlusMinus();
         return;
@@ -70,6 +72,7 @@ function clickNumber(number){
             
             disableNumbers();
             activatePlusMinus();
+            
         }
 
     }
@@ -92,6 +95,7 @@ function clickComma(){
 
     }
     else if(calculateNumberOfDigits(getScreen()) >= maximumDigits) {
+        
         disableNumbers();
         activatePlusMinus();
         return;
@@ -254,6 +258,7 @@ function removeHighlighted(){
 }
 
 function keyboard (TheEvent) { 
+   
     TheEvent.preventDefault();
     let events = TheEvent || window.event;
     let k=events.keyCode; 
