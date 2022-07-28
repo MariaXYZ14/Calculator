@@ -15,17 +15,17 @@ window.onload = function(){
     var index = 0, length = numbers.length;
 
     for ( ; index < length; index++) {
-        numbers[index].onclick = function(){clickNumber(this.value)};  
+
+        numbers[index].onclick = function(){clickNumber(this.value)}; 
+
     }
 
     getButtons('comma').onclick = function(){clickComma()};
-
     getButtons('division').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList)};
     getButtons('multiply').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList)};
     getButtons('minus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList)};
     getButtons('plus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('plus').classList)};
     getButtons('equal').onclick = function(){calculate();removeHighlighted();};
-
     getButtons('C').onclick = function(){clickErase();removeHighlighted();};
     getButtons('plus-minus').onclick = function(){clickPlusMinus()};
 
