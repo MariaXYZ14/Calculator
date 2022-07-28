@@ -274,8 +274,7 @@ function keyboard (TheEvent) {
        clickNumber(p);
 
     }
-
-    if (k == 110 || k == 188){getButtons("comma").click} 
+    if (k == 110 || k == 188){getButtons("comma").click();} 
     if (k == 106 || k == 88){clickOperation('x'); changeHighlighted(document.getElementById('multiply').classList)} 
     if (k == 107 || k == 187){clickOperation('+'); changeHighlighted(document.getElementById('plus').classList)} 
     if (k == 109 || k == 189){clickOperation('-'); changeHighlighted(document.getElementById('minus').classList)} 
