@@ -5,6 +5,6 @@
     "playwright": "^1.25.1"
   },
   "scripts": {
-    "test:e2e": "cucumber-js --require cucumber.conf.js --require steps.js --tags \"not @manual\" --parallel 4"
+    "test:e2e": "cucumber-js --require steps/cucumber.conf.js --require steps/calculator-steps.js --tags \"not @manual\" --parallel 4"
   }
 }

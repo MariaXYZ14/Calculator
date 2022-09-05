@@ -59,6 +59,7 @@ export function contZero(number){
     let cadena = number.toFixed(10).toString();
    
     if(!cadena.includes('.')){
+        
         return 0;
     }
 
