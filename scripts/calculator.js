@@ -5,13 +5,13 @@ import{getButtons,getScreen,setScreen,addScreen, getButtonsClass} from './getter
 let firstNumber;
 let secondNumber;
 let operation = '';
-let maximumDigits = 10;
+let maximumDigits = 10; // const MAXIMUM_DIGITS = 10;
 let isDeletedScreen = false;
 let isDisplayReset = false;
 
 window.onload = function(){ 
     
-    var numbers = getButtonsClass("numbers");
+    var numbers = getButtonsClass("numbers"); //getButtonsByClass("numbers")
     var index = 0, length = numbers.length;
 
     for ( ; index < length; index++) {
@@ -20,7 +20,7 @@ window.onload = function(){
 
     }
 
-    getButtons('comma').onclick = function(){clickComma()};
+    getButtons('comma').onclick = function(){clickComma()}; // getButtonByName
     getButtons('division').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList)};
     getButtons('multiply').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList)};
     getButtons('minus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList)};
@@ -38,7 +38,7 @@ window.onload = function(){
 function clickNumber(number){
    
     activatePlusMinus();
-    activateButtons();
+    activateButtons(); // setButtonsStatus
     
     if(isDeletedScreen){
       
@@ -51,7 +51,7 @@ function clickNumber(number){
         setScreen(number);
 
     }
-    else if(getScreen() != null && isDisplayReset){
+    else if(getScreen() != null && isDisplayReset){ //treure getScreen() != null
       
         setScreen(number);
         isDisplayReset = false;
@@ -66,7 +66,7 @@ function clickNumber(number){
     }
     else{
 
-        addScreen(number);
+        addScreen(number); //addToScreen
 
         if(calculateNumberOfDigits(getScreen()) >= maximumDigits){ 
             
@@ -117,7 +117,7 @@ function clickPlusMinus(){
     
     let screen = getScreen();
 
-    if(screen == '' || screen == 0 || screen == '0,' || isDeletedScreen){
+    if(screen == '' || screen == '0' || screen == '0,' || isDeletedScreen){
  
         return;
 
@@ -143,7 +143,7 @@ function clickOperation(NewOperation){
     activateComma();
     disablePlusMinus();
 
-    if(operation == '' || isDeletedScreen){
+    if(operation === '' || isDeletedScreen){
       
         operation = NewOperation;
         firstNumber = getScreen();
@@ -188,7 +188,7 @@ function calculate(){
         
         let result;
         let firstNumberConverted;
-        let secondNumberConverted = '';
+        let secondNumberConverted;
 
         secondNumber = screen;
         firstNumberConverted = convertToNumber(firstNumber);
@@ -216,6 +216,7 @@ function calculate(){
         }
     
     operation = '';
+
     setScreen(convertToString(result));
 
     }
@@ -226,8 +227,8 @@ function clickErase(){
     activateButtons();
     activateComma();
     activatePlusMinus();
-
     setScreen('0'); 
+
     isDeletedScreen = false;
     firstNumber = '';
     secondNumber = '';
@@ -235,12 +236,12 @@ function clickErase(){
 
 }
 
-function changeHighlighted(changeClass){
+function changeHighlighted(button){
 
     removeHighlighted();
 
-    changeClass.remove("operation");
-    changeClass.add("operation2");
+    button.remove("operation");
+    button.add("operation2");
     
 }
 
