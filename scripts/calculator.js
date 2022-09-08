@@ -1,27 +1,27 @@
 import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers,disableZero} from './disabling_buttons_helper.js';
 import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
-import{getButtons,getScreen,setScreen,addScreen, getButtonsClass} from './getters-setters_helper.js';
+import{getButtons,getScreen,setScreen,addScreen, getButtonsByClass} from './getters-setters_helper.js';
 
 let firstNumber;
 let secondNumber;
 let operation = '';
-let maximumDigits = 10; // const MAXIMUM_DIGITS = 10;
+const MAXIMUM_DIGITS = 10; 
 let isDeletedScreen = false;
 let isDisplayReset = false;
 let isClickedNumber = false;
 
 window.onload = function(){ 
     
-    var numbers = getButtonsClass("numbers"); //getButtonsByClass("numbers")
-    var index = 0, length = numbers.length;
+    var numbers = getButtonsByClass("numbers"); 
 
-    for ( ; index < length; index++) {
+    for ( var index = 0; index < numbers.length; index++) {
 
         numbers[index].onclick = function(){clickNumber(this.value)}; 
 
     }
 
-    getButtons('comma').onclick = function(){clickComma()}; // getButtonByName
+    
+    getButtons('comma').onclick = function(){clickComma()}; 
     getButtons('division').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList);isClickedNumber=false;};
     getButtons('multiply').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList);isClickedNumber=false;};
     getButtons('minus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList);isClickedNumber=false;};
@@ -59,7 +59,7 @@ function clickNumber(number){
         isClickedNumber = false;
         
     }
-    else if(calculateNumberOfDigits(getScreen()) >= maximumDigits){
+    else if(calculateNumberOfDigits(getScreen()) >= MAXIMUM_DIGITS){
         
         disableNumbers();
         activatePlusMinus();
@@ -70,7 +70,7 @@ function clickNumber(number){
 
         addScreen(number); //addToScreen
 
-        if(calculateNumberOfDigits(getScreen()) >= maximumDigits){ 
+        if(calculateNumberOfDigits(getScreen()) >= MAXIMUM_DIGITS){ 
             
             disableNumbers();
             activatePlusMinus();
@@ -96,7 +96,7 @@ function clickComma(){
         return;
 
     }
-    else if(calculateNumberOfDigits(getScreen()) >= maximumDigits) {
+    else if(calculateNumberOfDigits(getScreen()) >= MAXIMUM_DIGITS) {
         
         disableNumbers();
         activatePlusMinus();
@@ -230,6 +230,10 @@ function clickErase(){
     activateComma();
     activatePlusMinus();
     setScreen('0'); 
+    disableZero();
+    disablePlusMinus();
+
+
 
     isDeletedScreen = false;
     firstNumber = '';

@@ -8,7 +8,7 @@ export function getButtons(buttonName){
 
 }
 
-export function getButtonsClass(classButton){
+export function getButtonsByClass(classButton){
 
     let buttonClass;
    
