@@ -1,6 +1,6 @@
-import{disableComma,activateComma,disablePlusMinus,activatePlusMinus,disableButtons,disableNumbers,activateButtons,activateNumbers,disableZero} from './disabling_buttons_helper.js';
+import{disableComma,setCommaStatus,disablePlusMinus,setPlusMinusStatus,disableButtons,disableNumbers,setButtonsStatus,setNumbersStatus,disableZero} from './disabling_buttons_helper.js';
 import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
-import{getButtons,getScreen,setScreen,addScreen, getButtonsByClass} from './getters-setters_helper.js';
+import{getButtons,getScreen,setScreen,addToScreen, getButtonsByClass} from './getters-setters_helper.js';
 
 let firstNumber;
 let secondNumber;
@@ -20,7 +20,6 @@ window.onload = function(){
 
     }
 
-    
     getButtons('comma').onclick = function(){clickComma()}; 
     getButtons('division').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList);isClickedNumber=false;};
     getButtons('multiply').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList);isClickedNumber=false;};
@@ -38,8 +37,8 @@ window.onload = function(){
 
 function clickNumber(number){
    
-    activatePlusMinus();
-    activateButtons(); // setButtonsStatus
+    setPlusMinusStatus();
+    setButtonsStatus(); 
     
     if(isDeletedScreen){
       
@@ -62,18 +61,18 @@ function clickNumber(number){
     else if(calculateNumberOfDigits(getScreen()) >= MAXIMUM_DIGITS){
         
         disableNumbers();
-        activatePlusMinus();
+        setPlusMinusStatus();
         return;
 
     }
     else{
 
-        addScreen(number); //addToScreen
+        addToScreen(number); 
 
         if(calculateNumberOfDigits(getScreen()) >= MAXIMUM_DIGITS){ 
             
             disableNumbers();
-            activatePlusMinus();
+            setPlusMinusStatus();
             
         }
 
@@ -92,6 +91,7 @@ function clickComma(){
 
     }    
     else if(getScreen().includes(',')){
+        
         disableComma(); 
         return;
 
@@ -99,7 +99,7 @@ function clickComma(){
     else if(calculateNumberOfDigits(getScreen()) >= MAXIMUM_DIGITS) {
         
         disableNumbers();
-        activatePlusMinus();
+        setPlusMinusStatus();
         return;
 
     }
@@ -110,7 +110,7 @@ function clickComma(){
     }
     else{
 
-        addScreen(',');
+        addToScreen(',');
 
     }
 }
@@ -141,8 +141,8 @@ function clickPlusMinus(){
 
 function clickOperation(NewOperation){
     
-    activateNumbers();
-    activateComma();
+    setNumbersStatus();
+    setCommaStatus();
     disablePlusMinus();
 
     if(operation === '' || isDeletedScreen){
@@ -226,14 +226,12 @@ function calculate(){
 
 function clickErase(){
     
-    activateButtons();
-    activateComma();
-    activatePlusMinus();
+    setButtonsStatus();
+    setCommaStatus(); 
+    setPlusMinusStatus();
     setScreen('0'); 
     disableZero();
     disablePlusMinus();
-
-
 
     isDeletedScreen = false;
     firstNumber = '';

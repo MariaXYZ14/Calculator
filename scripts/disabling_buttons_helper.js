@@ -18,7 +18,7 @@ export function disableZero(){
 
 }
 
-export function activateComma(){
+export function setCommaStatus(){
 
     getComma().style.backgroundColor = "#12a6d3";
     getComma().style.cursor = "pointer";
@@ -36,7 +36,7 @@ export function disablePlusMinus(){
  
 }
 
-export function activatePlusMinus(){
+export function setPlusMinusStatus(){
 
     getPlusMinus().style.backgroundColor = "rgb(255, 255, 255)";
     getPlusMinus().style.color = "black";
@@ -55,9 +55,8 @@ export function disableButtons(){
 export function disableNumbers(){
     
     var elementsNumbers = document.querySelectorAll(".numbers");
-    var index = 0, length = elementsNumbers.length;
 
-    for ( ; index < length; index++) {
+    for ( var index =0; index < elementsNumbers.length; index++) {
 
         elementsNumbers[index].style.backgroundColor = "#FF0000";
         elementsNumbers[index].style.cursor = "not-allowed";
@@ -74,9 +73,8 @@ export function disableNumbers(){
 export function disableOperators(){
    
     var elementsOperations = document.getElementsByClassName("changedOperationButtonClass");
-    var index = 0, length = elementsOperations.length;
-
-    for ( ; index < length; index++) {
+    
+    for ( var index = 0 ; index < elementsOperations.length; index++) {
 
         elementsOperations[index].classList.remove("operation");
         elementsOperations[index].classList.add("operationRed");
@@ -86,31 +84,29 @@ export function disableOperators(){
 
 }
 
-export function activateButtons(){
+export function setButtonsStatus(){
   
-    activateNumbers();
+    setNumbersStatus();
 
     var elementsOperations = document.getElementsByClassName("changedOperationButtonClass");
-    var index2 = 0, length = elementsOperations.length;
+   
+    for ( var index = 0 ; index < elementsOperations.length; index++) {
 
-    for ( ; index2 < length; index2++) {
-
-        elementsOperations[index2].classList.remove("operationRed");
-        elementsOperations[index2].classList.add("operation");
-        elementsOperations[index2].disabled = false;
+        elementsOperations[index].classList.remove("operationRed");
+        elementsOperations[index].classList.add("operation");
+        elementsOperations[index].disabled = false;
 
     }
 
-    activatePlusMinus();
+    setPlusMinusStatus();
 
 }
 
-export function activateNumbers(){
+export function setNumbersStatus(){
 
     var elementsNumbers = document.querySelectorAll(".numbers");
-    var index = 0, length = elementsNumbers.length;
-
-    for ( ; index < length; index++) {
+    
+    for ( var index = 0 ; index < elementsNumbers.length; index++) {
 
         elementsNumbers[index].style.backgroundColor = "rgb(29, 191, 240)";
         elementsNumbers[index].style.cursor = "pointer";

@@ -28,7 +28,7 @@ export function setScreen(newValue) {
     
 }
 
-export function addScreen(newValue) {
+export function addToScreen(newValue) {
     
     document.getElementById('screen').value += newValue;
     
