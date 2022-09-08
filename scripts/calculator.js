@@ -92,7 +92,7 @@ function clickComma(){
 
     }    
     else if(getScreen().includes(',')){
-            
+        disableComma(); 
         return;
 
     }
