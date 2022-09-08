@@ -8,6 +8,7 @@ let operation = '';
 let maximumDigits = 10; // const MAXIMUM_DIGITS = 10;
 let isDeletedScreen = false;
 let isDisplayReset = false;
+let isClickedNumber = false;
 
 window.onload = function(){ 
     
@@ -21,11 +22,11 @@ window.onload = function(){
     }
 
     getButtons('comma').onclick = function(){clickComma()}; // getButtonByName
-    getButtons('division').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList)};
-    getButtons('multiply').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList)};
-    getButtons('minus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList)};
-    getButtons('plus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('plus').classList)};
-    getButtons('equal').onclick = function(){calculate();removeHighlighted();};
+    getButtons('division').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('division').classList);isClickedNumber=false;};
+    getButtons('multiply').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('multiply').classList);isClickedNumber=false;};
+    getButtons('minus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('minus').classList);isClickedNumber=false;};
+    getButtons('plus').onclick = function(){clickOperation(this.value);changeHighlighted(document.getElementById('plus').classList);isClickedNumber=false;};
+    getButtons('equal').onclick = function(){calculate();removeHighlighted();isClickedNumber=true;};
     getButtons('C').onclick = function(){clickErase();removeHighlighted();};
     getButtons('plus-minus').onclick = function(){clickPlusMinus()};
 
@@ -51,10 +52,11 @@ function clickNumber(number){
         setScreen(number);
 
     }
-    else if(getScreen() != null && isDisplayReset){ //treure getScreen() != null
+    else if(isDisplayReset && isClickedNumber){ 
       
         setScreen(number);
         isDisplayReset = false;
+        isClickedNumber = false;
         
     }
     else if(calculateNumberOfDigits(getScreen()) >= maximumDigits){
