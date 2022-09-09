@@ -2,21 +2,21 @@ import{disableComma,setCommaStatus,disablePlusMinus,setPlusMinusStatus,disableBu
 import{calculateNumberOfDigits,convertToNumber,convertToString} from './math_functions_helper.js'
 import{getButtons,getScreen,setScreen,addToScreen, getButtonsByClass} from './getters-setters_helper.js';
 
+const MAXIMUM_DIGITS = 10; 
 let firstNumber;
 let secondNumber;
 let operation = '';
-const MAXIMUM_DIGITS = 10; 
 let isDeletedScreen = false;
 let isDisplayReset = false;
 let isClickedNumber = false;
 
 window.onload = function(){ 
     
-    var numbers = getButtonsByClass("numbers"); 
+    var buttonNumbers = getButtonsByClass("numbers"); 
 
-    for ( var index = 0; index < numbers.length; index++) {
+    for ( var index = 0; index < buttonNumbers.length; index++) {
 
-        numbers[index].onclick = function(){clickNumber(this.value)}; 
+        buttonNumbers[index].onclick = function(){clickNumber(this.value)}; 
 
     }
 
@@ -113,6 +113,7 @@ function clickComma(){
         addToScreen(',');
 
     }
+
 }
 
 function clickPlusMinus(){
@@ -293,4 +294,4 @@ function keyboard (TheEvent) {
     if (k == 27){clickErase();removeHighlighted();} //C
     if (k == 17){getButtons("plus-minus").click();}
     
-    }
+}

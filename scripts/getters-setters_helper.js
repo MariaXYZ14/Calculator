@@ -15,11 +15,13 @@ export function getButtonsByClass(classButton){
     buttonClass = document.getElementsByClassName(classButton);
     
     return buttonClass;
+
 }
 
 export function getScreen(){
 
     return document.getElementById('screen').value;
+    
 }
 
 export function setScreen(newValue) {
