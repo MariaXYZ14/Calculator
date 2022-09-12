@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 
-
 body{
 
     font-family:'Exo', sans-serif;
@@ -12,7 +11,6 @@ body{
     color:white;
 
 }
-
 
 .w3-container{
 
@@ -44,7 +42,6 @@ body{
 
 }
 
-
 #title:hover{
   
     cursor: pointer;
@@ -72,7 +69,6 @@ body{
  
 }
 
-
 .numbers{
 
     position:relative;
@@ -95,7 +91,6 @@ body{
     transform: scale(1.05);
 
 }
-
 
 #zero{
 
@@ -189,6 +184,7 @@ body{
     opacity:70%;
     cursor: pointer;
     transform: scale(1.05);
+    
 }
 
 .operationRed:hover{
@@ -196,6 +192,7 @@ body{
     opacity:70%;
     cursor:not-allowed;
     transform: scale(1.05);
+    
 }
 
 #C{
